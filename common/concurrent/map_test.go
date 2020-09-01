@@ -14,25 +14,25 @@ func TestSetAndGet(t *testing.T) {
 
 	cmap.Set("1", str)
 	ret, ok := cmap.Get("1")
-	assert.Equal(t, ok, true, "Ok should be true")
+	assert.Equal(t, ok, true)
 	if ret == nil {
-		t.Errorf("Item shouldn't be nil")
+		t.Fatal("Item shouldn't be nil")
 	}
-	assert.Equal(t, ret.(string), str, "Item is not the same")
+	assert.Equal(t, ret.(string), str)
 }
 
-// TestEmptyPop ...
+// TestEmptyGet ...
 func TestEmptyGet(t *testing.T) {
 	cmap := concurrent.NewMap()
 
 	ret, ok := cmap.Get("1")
-	assert.Equal(t, ok, false, "Ok should be false")
+	assert.Assert(t, !ok)
 	if ret != nil {
-		t.Errorf("Item should be nil")
+		t.Fatal("Item should be nil")
 	}
 }
 
-// TestRange ...
+// TestMapRange ...
 func TestMapRange(t *testing.T) {
 	cmap := concurrent.NewMap()
 	items := [3]int{1, 2, 3}
@@ -48,5 +48,5 @@ func TestMapRange(t *testing.T) {
 			counter += 1
 		}
 	}
-	assert.Equal(t, counter, 3, "Cannot find all the appended items")
+	assert.Equal(t, counter, 3)
 }

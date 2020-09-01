@@ -36,7 +36,7 @@ func TestEmptyPop(t *testing.T) {
 	assert.Equal(t, err, errors.EmptySlice{}, "error is not in the good format")
 }
 
-// TestRange ...
+// TestSliceRange ...
 func TestSliceRange(t *testing.T) {
 	slice := concurrent.Slice{}
 	items := [3]int{1, 2, 3}

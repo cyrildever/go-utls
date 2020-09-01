@@ -89,9 +89,9 @@ func (cm *Map) Pop(key string) (interface{}, bool) {
 	return value, ok
 }
 
-// Iter iterates over the items in a concurrent map
+// Iter iterates over the items in a concurrent map.
 // Each item is sent over a channel, so that
-// we can iterate over the map using the builtin range keyword
+// we can iterate over the map using the builtin range keyword.
 func (cm *Map) Iter() <-chan MapItem {
 	c := make(chan MapItem)
 

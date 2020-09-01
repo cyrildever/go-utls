@@ -8,9 +8,6 @@ import (
 	cerrors "github.com/cyrildever/go-utls/common/concurrent/errors"
 )
 
-// Checker is a function type. You can see it as a function that you have to implement for each of the structure you want to add inside the slice. It should be passed as a parameter at the slice.Check or slice.Get
-type Checker func(interface{}, interface{}) bool
-
 // Slice type that can be safely shared between goroutines
 type Slice struct {
 	sync.RWMutex
@@ -23,6 +20,10 @@ type SliceItem struct {
 	Value interface{}
 }
 
+// Checker is a function type. You can see it as a function that you have to implement for each structure you want to add inside the slice.
+// It should be passed as parameter at the Check() or Get() methods.
+type Checker func(interface{}, interface{}) bool
+
 // Append adds an item to the concurrent slice
 func (cs *Slice) Append(item interface{}) {
 	cs.Lock()
@@ -31,8 +32,8 @@ func (cs *Slice) Append(item interface{}) {
 	cs.items = append(cs.items, item)
 }
 
-// Get will return the interface corresponding with the value and the Checker given
-// If no Checker is given, than we're comparing interface.
+// Get will return the interface corresponding with the value and the Checker given.
+// If no Checker is given, then we're comparing interface.
 func (cs *Slice) Get(value interface{}, f Checker) interface{} {
 	cs.RLock()
 	defer cs.RUnlock()

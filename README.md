@@ -19,7 +19,7 @@ go get github.com/cyrildever/go-utls
 ```
 
 This repository contains the following modules:
-- `crypto`: a kind of proxy to Go-Ethereum's ECIES library;
+- `crypto`: a proxy to Go-Ethereum's ECIES library;
 - `model`: a list of types I frequently use in my projects (such as `Base64` or `Hash` types) all implementing my [`Model`](model/Model.go) interface;
 - `normalizer`: the adaptation of my Empreinte Sociométrique&trade; patented work for normalizing contact data (see its specific [README](normalizer/README.md) or its TypeScript equivalent on [NPM](https://www.npmjs.com/package/es-normalizer));
 - a few common utility sub-modules:
