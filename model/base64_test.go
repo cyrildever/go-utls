@@ -15,3 +15,12 @@ func TestIsBase64String(t *testing.T) {
 	wrongStr := "Z^$x."
 	assert.Assert(t, model.IsBase64String(wrongStr) == false)
 }
+
+// TestEmptiness ...
+func TestEmptiness(t *testing.T) {
+	empty := model.Base64("")
+	assert.Assert(t, empty.IsEmpty())
+
+	nonEmpty := model.Base64("Ab==")
+	assert.Assert(t, nonEmpty.NonEmpty())
+}

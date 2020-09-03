@@ -6,8 +6,77 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+//--- TYPES
+
 // Bits8 is an 8-bit representation of a bit set, ie. a single byte/octet
 type Bits8 uint8
+
+//--- METHODS
+
+// Bytes ...
+func (b Bits8) Bytes() []byte {
+	return utils.Uint8ToByteArray(uint8(b))
+}
+
+// String ...
+func (b Bits8) String() string {
+	var str string
+	for i := 0; i < 8; i++ {
+		flag := 1
+		flag = flag << uint(i)
+		if b.Has(Bits8(flag)) {
+			str = "1" + str
+		} else {
+			str = "0" + str
+		}
+	}
+	return str
+}
+
+// IsEmpty ...
+func (b Bits8) IsEmpty() bool {
+	return b.Bytes() == nil
+}
+
+// NonEmpty ...
+func (b Bits8) NonEmpty() bool {
+	return b.String() != ""
+}
+
+// Set ...
+func (b *Bits8) Set(flag Bits8) {
+	bits := *b | flag
+	*b = bits
+}
+
+// Clear ...
+func (b *Bits8) Clear(flag Bits8) {
+	bits := *b &^ flag
+	*b = bits
+}
+
+// ClearAll ...
+func (b *Bits8) ClearAll() {
+	*b = *new(Bits8)
+}
+
+// Toggle ...
+func (b *Bits8) Toggle(flag Bits8) {
+	bits := *b ^ flag
+	*b = bits
+}
+
+// Has ...
+func (b *Bits8) Has(flag Bits8) bool {
+	return *b&flag != 0
+}
+
+//--- FUNCTIONS
+
+// ToBits8 ...
+func ToBits8(bytes []byte) Bits8 {
+	return Bits8(utils.ByteArrayToUint8(bytes))
+}
 
 // StringToBits8 ...
 func StringToBits8(str string) (b Bits8, err error) {
@@ -46,64 +115,4 @@ func IsBits8String(str string) bool {
 		}
 	}
 	return true
-}
-
-//--- METHODS
-
-// Bytes ...
-func (b Bits8) Bytes() []byte {
-	return utils.Uint8ToByteArray(uint8(b))
-}
-
-// String ...
-func (b Bits8) String() string {
-	var str string
-	for i := 0; i < 8; i++ {
-		flag := 1
-		flag = flag << uint(i)
-		if b.Has(Bits8(flag)) {
-			str = "1" + str
-		} else {
-			str = "0" + str
-		}
-	}
-	return str
-}
-
-// NonEmpty ...
-func (b Bits8) NonEmpty() bool {
-	return b.String() != ""
-}
-
-// ToBits8 ...
-func ToBits8(bytes []byte) Bits8 {
-	return Bits8(utils.ByteArrayToUint8(bytes))
-}
-
-// Set ...
-func (b *Bits8) Set(flag Bits8) {
-	bits := *b | flag
-	*b = bits
-}
-
-// Clear ...
-func (b *Bits8) Clear(flag Bits8) {
-	bits := *b &^ flag
-	*b = bits
-}
-
-// ClearAll ...
-func (b *Bits8) ClearAll() {
-	*b = *new(Bits8)
-}
-
-// Toggle ...
-func (b *Bits8) Toggle(flag Bits8) {
-	bits := *b ^ flag
-	*b = bits
-}
-
-// Has ...
-func (b *Bits8) Has(flag Bits8) bool {
-	return *b&flag != 0
 }

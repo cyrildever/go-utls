@@ -4,8 +4,12 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+//--- TYPES
+
 // Key is the hexadecimal string representation of a public or private key.
 type Key string
+
+//--- METHODS
 
 // Bytes ...
 func (k Key) Bytes() []byte {
@@ -20,10 +24,17 @@ func (k Key) String() string {
 	return string(k)
 }
 
+// IsEmpty ...
+func (k Key) IsEmpty() bool {
+	return k.Bytes() == nil
+}
+
 // NonEmpty ...
 func (k Key) NonEmpty() bool {
 	return k.String() != ""
 }
+
+//--- FUNCTIONS
 
 // ToKey ...
 func ToKey(bytes []byte) Key {
@@ -31,17 +42,4 @@ func ToKey(bytes []byte) Key {
 		return Key("")
 	}
 	return Key(utils.ToHex(bytes))
-}
-
-// Keys is an array of Key.
-type Keys []Key
-
-// Contains ...
-func (k Keys) Contains(item Key) bool {
-	for _, key := range k {
-		if key == item {
-			return true
-		}
-	}
-	return false
 }

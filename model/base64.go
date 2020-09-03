@@ -4,9 +4,13 @@ import (
 	"encoding/base64"
 )
 
+//--- TYPES
+
 // Base64 is the base64 string representation of a byte array.
 // NB: if the passed string is not a valid base64 representation, it will not throw an error but rather returns empty or nil items when methods are called.
 type Base64 string
+
+//--- METHODS
 
 // Bytes ...
 func (b Base64) Bytes() []byte {
@@ -29,10 +33,17 @@ func (b Base64) String() string {
 	return str
 }
 
+// IsEmpty ...
+func (b Base64) IsEmpty() bool {
+	return b.Bytes() == nil
+}
+
 // NonEmpty ...
 func (b Base64) NonEmpty() bool {
 	return b.String() != ""
 }
+
+//--- FUNCTIONS
 
 // ToBase64 ...
 func ToBase64(bytes []byte) Base64 {

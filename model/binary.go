@@ -7,9 +7,13 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+//--- TYPES
+
 // Binary is the string representation of a binary literal, eg. Binary("1001") would equal to `0b1001` in other languages or starting with version 1.13 of Golang.
 // NB: if the underlying string is not a valid string representation of a binary, it will not throw an error but rather return an empty or nil item for each method called.
 type Binary string
+
+//--- METHODS
 
 // Bytes ...
 func (b Binary) Bytes() []byte {
@@ -33,10 +37,17 @@ func (b Binary) String() string {
 	return string(b)
 }
 
+// IsEmpty ...
+func (b Binary) IsEmpty() bool {
+	return b.Bytes() == nil
+}
+
 // NonEmpty ...
 func (b Binary) NonEmpty() bool {
 	return b.String() != ""
 }
+
+//--- FUNCTIONS
 
 // ToBinary ...
 func ToBinary(bytes []byte) Binary {

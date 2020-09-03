@@ -31,10 +31,17 @@ func (u UUID) String() string {
 	return string(u)
 }
 
+// IsEmpty ...
+func (u UUID) IsEmpty() bool {
+	return u.Bytes() == nil
+}
+
 // NonEmpty ...
 func (u UUID) NonEmpty() bool {
 	return u.String() != ""
 }
+
+//--- FUNCTIONS
 
 // ToUUID ...
 func ToUUID(bytes []byte) UUID {
