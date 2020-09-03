@@ -13,16 +13,19 @@ type Ciphered string
 
 //--- METHODS
 
-// Bytes ...
+// Bytes returns the underlying byte array if it's an actual base64-encoded string, or nil.
 func (c Ciphered) Bytes() []byte {
-	if c.String() == "" {
+	if c.String() == "" || !IsBase64String(c.String()) {
 		return nil
 	}
 	return utils.Must(base64.StdEncoding.DecodeString(string(c)))
 }
 
-// String ...
+// String returns the ciphered string if it's an actual base64-encoded string, or an empty string.
 func (c Ciphered) String() string {
+	if !IsBase64String(string(c)) {
+		return ""
+	}
 	return string(c)
 }
 

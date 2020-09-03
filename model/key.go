@@ -13,7 +13,7 @@ type Key string
 
 // Bytes ...
 func (k Key) Bytes() []byte {
-	if k.String() == "" {
+	if k.String() == "" || !IsHexString(string(k)) {
 		return nil
 	}
 	return utils.Must(utils.FromHex(string(k)))
@@ -21,6 +21,9 @@ func (k Key) Bytes() []byte {
 
 // String ...
 func (k Key) String() string {
+	if !IsHexString(string(k)) {
+		return ""
+	}
 	return string(k)
 }
 

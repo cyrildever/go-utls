@@ -10,21 +10,25 @@ var hashRegex = regexp.MustCompile(`^[0-9a-fA-F]{32}([0-9a-fA-F]{32})?$`)
 
 //--- TYPES
 
-// Hash is the hexadecimal string representation of a hash.
+// Hash is the hexadecimal string representation of a hash.Hash
+// It's either a 32-character or a 64-character long.
 type Hash string
 
 //--- METHODS
 
-// Bytes ...
+// Bytes returns the underlying byte array if it's an actual hash string, or nil.
 func (h Hash) Bytes() []byte {
-	if h.String() == "" {
+	if h.String() == "" || !CouldBeValidHash(h.String()) {
 		return nil
 	}
 	return utils.Must(utils.FromHex(string(h)))
 }
 
-// String ...
+// String returns the hexadecimal string representation if it's an actual hash string, or an empty string.
 func (h Hash) String() string {
+	if !CouldBeValidHash(string(h)) {
+		return ""
+	}
 	return string(h)
 }
 

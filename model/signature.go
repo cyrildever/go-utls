@@ -13,7 +13,7 @@ type Signature string
 
 // Bytes ...
 func (s Signature) Bytes() []byte {
-	if s.String() == "" {
+	if s.String() == "" || !IsHexString(s.String()) {
 		return nil
 	}
 	return utils.Must(utils.FromHex(string(s)))
@@ -21,6 +21,9 @@ func (s Signature) Bytes() []byte {
 
 // String ...
 func (s Signature) String() string {
+	if !IsHexString(string(s)) {
+		return ""
+	}
 	return string(s)
 }
 
