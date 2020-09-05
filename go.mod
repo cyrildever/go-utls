@@ -9,6 +9,7 @@ require (
 	github.com/inconshreveable/log15 v0.0.0-20200109203555-b30bc20e4fd1
 	github.com/metakeule/fmtdate v1.1.2
 	github.com/sammyne/bip32 v1.0.1
+	github.com/valyala/fasthttp v1.16.0
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
 	golang.org/x/text v0.3.3
