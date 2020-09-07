@@ -14,6 +14,13 @@ func TestHashBytes(t *testing.T) {
 	assert.DeepEqual(t, bytes, hash.Bytes())
 }
 
+// TestLongString ...
+func TestLongString(t *testing.T) {
+	ref := "045206550e06560c0c54040f5c010151010857555b59515e58075d0a0c550f070e5004525504000f550855015d545a545a5709060504575f565f0206055a5100"
+	hash := model.Hash(ref)
+	assert.Equal(t, hash.String(), ref)
+}
+
 // TestToHash ...
 func TestToHash(t *testing.T) {
 	ref := model.Hash("123e3b30d0b76c2349a0229fc70128f5709c9101b67de347216b7506efecb310")

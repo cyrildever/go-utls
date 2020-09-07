@@ -40,7 +40,7 @@ func TestPerformance(t *testing.T) {
 	}
 	t1 := time.Now().UnixNano()
 	if nbOfTimes == 1000000 {
-		assert.Assert(t, (t1-t0)/int64(time.Millisecond) < 1000)
+		assert.Assert(t, (t1-t0)/int64(time.Millisecond) < 1100)
 		assert.Equal(t, utils.ToHex(hash), "aa019937660afa59ec3b302dc2970fd7a34be3eb851ed1d477b073797a3c0335")
 	}
 	// fmt.Printf("final hash: '%s' computed in %d ms\n", utils.ToHex(hash), (t1-t0)/int64(time.Millisecond))

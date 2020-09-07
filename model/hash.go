@@ -6,12 +6,12 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
-var hashRegex = regexp.MustCompile(`^[0-9a-fA-F]{32}([0-9a-fA-F]{32})?$`)
+var hashRegex = regexp.MustCompile(`^[0-9a-fA-F]{32}([0-9a-fA-F]{32}[0-9a-fA-F]*)?$`)
 
 //--- TYPES
 
 // Hash is the hexadecimal string representation of a hash.Hash
-// It's either a 32-character or a 64-character long.
+// It's either a 32-character, or a 64-character long and more.
 type Hash string
 
 //--- METHODS
