@@ -19,15 +19,15 @@ go get github.com/cyrildever/go-utls
 ```
 
 This repository contains the following modules:
-- `crypto`: a proxy to Go-Ethereum's ECIES library;
+- `crypto`: a proxy to Go-Ethereum's ECIES library and to my [`ecies-geth`](https://www.npmjs.com/package/ecies-geth) JavaScript library;
 - `io`: a light REST client utility on top of `fasthttp`;
 - `model`: a list of types I frequently use in my projects (such as `Base64` or `Hash` types) all implementing my [`Model`](model/Model.go) interface;
-- `normalizer`: the adaptation of my Empreinte Sociométrique&trade; patented work for normalizing contact data (see its specific [README](normalizer/README.md) or its TypeScript equivalent on [NPM](https://www.npmjs.com/package/es-normalizer));
+- `normalizer`: the adaptation of my Empreinte Sociométrique&trade; patented work for normalizing contact data (see its specific [README](normalizer/README.md) or its TypeScript equivalent on NPM: [`es-normalizer`](https://www.npmjs.com/package/es-normalizer));
 - a few common utility sub-modules:
   * `concurrent`: to handle concurrent maps and slices;
-  * `file`: to find, known existence or get lines from files;
+  * `file`: to find, know existence or get lines from files;
   * `logger`: a wrapper to [`github.com/inconshreveable/log15`](https://github.com/inconshreveable/log15) module;
-  * `packer`: to marshal/unmarshal data (JSON, MessagePack, Bson, ...);
+  * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, ...);
   * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, ...);
   * `xor`: to apply XOR operation to strings or byte arrays.
 

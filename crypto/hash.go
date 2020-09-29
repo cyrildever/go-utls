@@ -6,7 +6,7 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
-// Hash is the hashing function that should be used whenever hashing in the rooot&trade; project.
+// Hash is the hashing function that should be used whenever hashing in the Rooot&trade; project.
 //
 // It takes a byte array as argument and returns a byte array and an error if any.
 // As of the latest version of the system, it double-hashes any input string with the SHA256 standard algorithm.

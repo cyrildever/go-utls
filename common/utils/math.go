@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"errors"
 	"math/big"
 	"sort"
 )
@@ -9,7 +8,7 @@ import (
 // EuclideanDivision returns the integer tuple (quotient, remainder) from the division of the past integers
 func EuclideanDivision(numerator, denominator int) (quotient, remainder int, err error) {
 	if denominator == 0 {
-		err = errors.New("division by zero") // TODO typed error
+		err = NewDivisionByZeroError()
 		return
 	}
 	quotient = numerator / denominator
@@ -73,4 +72,18 @@ func getClosest(val1 *big.Int, val2 *big.Int, target *big.Int) *big.Int {
 		return val2
 	}
 	return val1
+}
+
+// DivisionByZeroError ...
+type DivisionByZeroError struct {
+	message string
+}
+
+func (e DivisionByZeroError) Error() string {
+	return e.message
+}
+func NewDivisionByZeroError() *DivisionByZeroError {
+	return &DivisionByZeroError{
+		message: "division by zero",
+	}
 }
