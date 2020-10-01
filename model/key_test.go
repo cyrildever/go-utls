@@ -31,3 +31,27 @@ func TestToKey(t *testing.T) {
 	key := model.ToKey(bytes)
 	assert.DeepEqual(t, ref.Bytes(), key.Bytes())
 }
+
+// TestKeysEquals ...
+func TestKeysEquals(t *testing.T) {
+	var keys1, keys2, keys3 model.Keys
+
+	key1 := model.Key("04aa01ccc5dd17d257a8b8cbfe371f4aaa7e4f5af153bba5aa472dc9fa4f84242d0ac607aac9f8b97ff34f5df4cba7bdf202aeff3ba032e895ecf32d2443e873ce")
+	key2 := model.Key("04e315a987bd79b9f49d3a1c8bd1ef5a401a242820d52a3f22505da81dfcd992cc5c6e2ae9bc0754856ca68652516551d46121daa37afc609036ab5754fe7a82a3")
+	key3 := model.Key("04abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890")
+
+	keys1 = append(keys1, key1)
+	keys1 = append(keys1, key2)
+	keys1 = append(keys1, key3)
+
+	keys2 = append(keys2, key1)
+	keys2 = append(keys2, key2)
+	keys2 = append(keys2, key3)
+
+	keys3 = append(keys3, key3)
+	keys3 = append(keys3, key1)
+	keys3 = append(keys3, key2)
+
+	assert.Assert(t, keys1.Equals(&keys2))
+	assert.Assert(t, !keys1.Equals(&keys3))
+}

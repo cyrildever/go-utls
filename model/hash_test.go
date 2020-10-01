@@ -29,8 +29,8 @@ func TestToHash(t *testing.T) {
 	assert.DeepEqual(t, ref.Bytes(), hash.Bytes())
 }
 
-// TestEquals ...
-func TestEquals(t *testing.T) {
+// TestHashesEquals ...
+func TestHashesEquals(t *testing.T) {
 	var hashes1, hashes2, hashes3 model.Hashes
 
 	hash1 := model.Hash("cb0518922221d45f0a1d2bdbe73a2c1d814e59e72d58a959e39ab57ad174a0dd")

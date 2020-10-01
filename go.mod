@@ -13,8 +13,8 @@ require (
 	github.com/valyala/fasthttp v1.16.0
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.1
-	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a // indirect
-	golang.org/x/sys v0.0.0-20200929083018-4d22bbb62b3c // indirect
+	golang.org/x/crypto v0.0.0-20200930160638-afb6bcd081ae // indirect
+	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect
 	golang.org/x/text v0.3.3
 	google.golang.org/appengine v1.6.6 // indirect
 	gotest.tools v2.2.0+incompatible
