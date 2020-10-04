@@ -1,6 +1,7 @@
 package utils_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/cyrildever/go-utls/common/utils"
@@ -45,4 +46,21 @@ func TestIntToByteArray(t *testing.T) {
 	b := utils.IntToByteArray(i)
 	assert.DeepEqual(t, b, []byte{255, 255, 255, 255, 255, 255, 255, 255})
 	assert.DeepEqual(t, i, utils.ByteArrayToInt(b))
+}
+
+// TestFloatToByteArray ...
+func TestFloatToByteArray(t *testing.T) {
+	ref := []byte{176, 114, 104, 145, 237, 124, 191, 63}
+	float := 0.123
+	b := utils.FloatToByteArray(float)
+	fmt.Println(b)
+	assert.DeepEqual(t, b, ref)
+}
+
+// TestByteArrayToFloat ...
+func TestByteArrayToFloat(t *testing.T) {
+	ref := 0.123
+	b := []byte{176, 114, 104, 145, 237, 124, 191, 63}
+	float := utils.ByteArrayToFloat(b)
+	assert.Equal(t, float, ref)
 }

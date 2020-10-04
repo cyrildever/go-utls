@@ -1,8 +1,12 @@
 package utils
 
 import (
+	"bytes"
 	"encoding/binary"
+	"math"
 )
+
+// NB: These conversions use little endian whenever a number is involved.
 
 // UintToByteArray converts the passed integer into a byte array.
 func UintToByteArray(data uint64) (barray []byte) {
@@ -36,4 +40,19 @@ func IntToByteArray(data int) []byte {
 // ByteArrayToInt converts the passed byte array to a int.
 func ByteArrayToInt(bytes []byte) int {
 	return int(binary.LittleEndian.Uint64(bytes))
+}
+
+// FloatToByteArray converts the passed float64 into a byte array.
+func FloatToByteArray(data float64) (barray []byte) {
+	var buf bytes.Buffer
+	if err := binary.Write(&buf, binary.LittleEndian, data); err != nil {
+		return nil
+	}
+	return buf.Bytes()
+}
+
+// ByteArrayToFloat converts the passed byte array to a float64.
+func ByteArrayToFloat(barray []byte) float64 {
+	bits := binary.LittleEndian.Uint64(barray)
+	return math.Float64frombits(bits)
 }

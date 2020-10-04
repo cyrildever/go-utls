@@ -28,7 +28,7 @@ This repository contains the following modules:
   * `file`: to find, know existence or get lines from files;
   * `logger`: a wrapper to [`github.com/inconshreveable/log15`](https://github.com/inconshreveable/log15) module;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, ...);
-  * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, ...);
+  * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, back-and-forth conversions of byte arrays (to string, number, etc.), ...);
   * `xor`: to apply XOR operation to strings or byte arrays.
 
 
