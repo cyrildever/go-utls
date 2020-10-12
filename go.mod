@@ -3,6 +3,7 @@ module github.com/cyrildever/go-utls
 go 1.12
 
 require (
+	github.com/beevik/ntp v0.3.0
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
 	github.com/elliotchance/orderedmap v1.3.0
 	github.com/ethereum/go-ethereum v1.9.22
