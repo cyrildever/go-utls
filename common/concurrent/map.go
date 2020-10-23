@@ -28,11 +28,11 @@ type MapItem struct {
 }
 
 // Set a key in a concurrent map
-func (cm *Map) Set(key string, value interface{}) {
+func (cm *Map) Set(key string, value interface{}) bool {
 	cm.Lock()
 	defer cm.Unlock()
 
-	cm.items.Set(key, value)
+	return cm.items.Set(key, value)
 }
 
 // Get a key from a concurrent map

@@ -12,9 +12,10 @@ func TestSetAndGet(t *testing.T) {
 	cmap := concurrent.NewMap()
 	str := "test"
 
-	cmap.Set("1", str)
+	ok := cmap.Set("1", str)
+	assert.Assert(t, ok)
 	ret, ok := cmap.Get("1")
-	assert.Equal(t, ok, true)
+	assert.Assert(t, ok)
 	if ret == nil {
 		t.Fatal("Item shouldn't be nil")
 	}
