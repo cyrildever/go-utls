@@ -16,7 +16,7 @@ func TestUniformize(t *testing.T) {
 
 // TestAny ...
 func TestAny(t *testing.T) {
-	normalized, _ := normalizer.Normalize("Any string to normalize().", normalizer.Any)
+	normalized, _ := normalizer.Normalize("Any   string to normalize().", normalizer.Any)
 	assert.Equal(t, normalized, "ANY STRING TO NORMALIZE")
 
 	// An empty string doesn't raise an error

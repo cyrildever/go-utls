@@ -1,6 +1,7 @@
 package ntp_test
 
 import (
+	"fmt"
 	"math"
 	"testing"
 	"time"
@@ -25,5 +26,7 @@ func TestNTPClient(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	assert.Assert(t, math.Abs(float64(t0.UnixNano()/1e6)-float64(t1.UnixNano()/1e6)) < limit)
+	elapsed := math.Abs(float64(t0.UnixNano()/1e6) - float64(t1.UnixNano()/1e6))
+	fmt.Println("elapsed", elapsed)
+	assert.Assert(t, elapsed < limit)
 }
