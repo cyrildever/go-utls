@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	MIN_LIMIT float64 = 100 // in milliseconds
+	MIN_LIMIT float64 = 100. // in milliseconds
 )
 
 var (
