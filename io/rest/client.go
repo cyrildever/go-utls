@@ -19,6 +19,9 @@ type Client struct {
 
 	// Context gives the name of the calling context, eg. "rest"
 	Context string
+
+	request  *fasthttp.Request
+	response *fasthttp.Response
 }
 
 //--- METHODS
@@ -51,6 +54,8 @@ func (c *Client) Get() (statusCode int, body []byte, err error) {
 		copy(copyOfBody, resp.Body())
 		body = copyOfBody
 	}
+	c.request = req
+	c.response = resp
 	return
 }
 
@@ -89,5 +94,15 @@ func (c *Client) Post(data []byte, contentType string) (statusCode int, body []b
 		body = copyOfBody
 	}
 	statusCode = resp.StatusCode()
+	c.request = req
+	c.response = resp
 	return
+}
+
+func (c *Client) Request() *fasthttp.Request {
+	return c.request
+}
+
+func (c *Client) Response() *fasthttp.Response {
+	return c.response
 }
