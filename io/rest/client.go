@@ -9,6 +9,14 @@ import (
 
 //--- TYPES
 
+// APIClient defines the contract for a REST API client
+type APIClient interface {
+	Get() (statusCode int, body []byte, err error)
+	Post(data []byte, contentType string) (statusCode int, body []byte, err error)
+	Request() *fasthttp.Request
+	Response() *fasthttp.Response
+}
+
 // Client ...
 type Client struct {
 	// URL is the full URL (including protocol and eventual query string et al.)
