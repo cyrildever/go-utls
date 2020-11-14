@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// Path is the string representation of a BIP32 path, eg. "m/0'/0/0"
+// Path is the string representation of a BIP32 path, eg. `m/0'/0/0`
 type Path string
 
 // Indices ...
