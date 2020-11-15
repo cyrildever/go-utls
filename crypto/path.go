@@ -50,7 +50,7 @@ func (p Path) Parse() (i Indices, err error) {
 	if err != nil {
 		return
 	}
-	keyIndex, err := strconv.ParseInt(parts[2], 10, 32)
+	keyIndex, err := strconv.ParseInt(parts[3], 10, 32)
 	if err != nil {
 		return
 	}

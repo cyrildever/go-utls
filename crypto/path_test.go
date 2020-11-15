@@ -15,10 +15,10 @@ func TestParse(t *testing.T) {
 			Hardened: true,
 		},
 		Scope:    0,
-		KeyIndex: 0,
+		KeyIndex: 123,
 	}
 
-	p := crypto.Path("m/0'/0/0")
+	p := crypto.Path("m/0'/0/123")
 	indices, err := p.Parse()
 	if err != nil {
 		t.Fatal(err)
