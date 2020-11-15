@@ -11,6 +11,8 @@ const defaultLogFile = "logger.log"
 
 // Init instantiates the logger with the specified arguments.
 // The first `args` parameter is the logger filename (default: logger.log).
+//
+// IMPORTANT: The logger will log to stderr and to the file.
 func Init(serviceName, contextName string, args ...string) log15.Logger {
 	if len(args) != 1 || args[0] == "" {
 		if len(args) == 0 {
@@ -24,6 +26,8 @@ func Init(serviceName, contextName string, args ...string) log15.Logger {
 }
 
 // InitHandler is generally used in API handlers to display the request ID.
+//
+// IMPORTANT: The logger will log to stderr and to the file.
 func InitHandler(serviceName, contextName, requestID string, args ...string) log15.Logger {
 	if len(args) != 1 || args[0] == "" {
 		if len(args) == 0 {
@@ -39,9 +43,9 @@ func InitHandler(serviceName, contextName, requestID string, args ...string) log
 func setHandlers(logger log15.Logger, filename string) log15.Logger {
 	var handlers []log15.Handler
 
-	// stdOut
-	stdOutHandler := log15.CallerStackHandler("%+v", log15.StdoutHandler)
-	handlers = append(handlers, stdOutHandler)
+	// stdErr
+	stdErrHandler := log15.CallerStackHandler("%+v", log15.StderrHandler)
+	handlers = append(handlers, stdErrHandler)
 
 	// file
 	pwd, _ := filepath.Abs(filepath.Dir(os.Args[0]))
