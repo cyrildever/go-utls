@@ -145,11 +145,12 @@ func (cs *Slice) GetOne() (interface{}, bool) {
 // Each item is sent over a channel, so that
 // we can iterate over the slice using the built-in range keyword
 func (cs *Slice) Iter() <-chan SliceItem {
+	cs.RLock()
+	defer cs.RUnlock()
+
 	c := make(chan SliceItem)
 
 	f := func() {
-		cs.RLock()
-		defer cs.RUnlock()
 		for index, value := range cs.items {
 			c <- SliceItem{index, value}
 		}

@@ -93,12 +93,12 @@ func (cm *Map) Pop(key string) (interface{}, bool) {
 // Each item is sent over a channel, so that
 // we can iterate over the map using the builtin range keyword.
 func (cm *Map) Iter() <-chan MapItem {
+	cm.RLock()
+	defer cm.RUnlock()
+
 	c := make(chan MapItem)
 
 	f := func() {
-		cm.RLock()
-		defer cm.RUnlock()
-
 		for el := cm.items.Front(); el != nil; el = el.Next() {
 			c <- MapItem{el.Key.(string), el.Value}
 		}
