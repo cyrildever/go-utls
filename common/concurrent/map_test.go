@@ -12,8 +12,7 @@ func TestSetAndGet(t *testing.T) {
 	cmap := concurrent.NewMap()
 	str := "test"
 
-	ok := cmap.Set("1", str)
-	assert.Assert(t, ok)
+	cmap.Set("1", str)
 	ret, ok := cmap.Get("1")
 	assert.Assert(t, ok)
 	if ret == nil {
@@ -81,6 +80,5 @@ func TestIter(t *testing.T) {
 
 	ok := cmap.Set("4", 4)
 	assert.Assert(t, ok, "insert after breaking should still work!")
-
 	assert.Equal(t, cmap.Size(), 4)
 }

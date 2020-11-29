@@ -32,7 +32,8 @@ func (cm *Map) Set(key string, value interface{}) bool {
 	cm.Lock()
 	defer cm.Unlock()
 
-	return cm.items.Set(key, value)
+	cm.items.Set(key, value)
+	return true
 }
 
 // Get a key from a concurrent map
