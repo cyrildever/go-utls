@@ -117,11 +117,11 @@ func (l *logger) init() {
 	}
 	f = file
 
-	l.dbug.file = log.New(f, LvlDebug.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile|log.Lmsgprefix)
-	l.info.file = log.New(f, LvlInfo.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile|log.Lmsgprefix)
-	l.warn.file = log.New(f, LvlWarn.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile|log.Lmsgprefix)
-	l.eror.file = log.New(f, LvlError.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile|log.Lmsgprefix)
-	l.crit.file = log.New(f, LvlCrit.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile|log.Lmsgprefix)
+	l.dbug.file = log.New(f, LvlDebug.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+	l.info.file = log.New(f, LvlInfo.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+	l.warn.file = log.New(f, LvlWarn.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+	l.eror.file = log.New(f, LvlError.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+	l.crit.file = log.New(f, LvlCrit.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
 }
 
 func (l *logger) Debug(msg string, ctx ...interface{}) {

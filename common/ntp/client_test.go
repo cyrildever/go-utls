@@ -12,7 +12,7 @@ import (
 
 // TestNTPClient ...
 func TestNTPClient(t *testing.T) {
-	var limit float64 = 500
+	var limit float64 = 999
 
 	_, err := ntp.Time("")
 	assert.Error(t, err, "NTP wasn't initialized")
