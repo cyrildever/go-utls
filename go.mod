@@ -8,6 +8,7 @@ require (
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
 	github.com/elliotchance/orderedmap v1.3.0
 	github.com/ethereum/go-ethereum v1.9.24
+	github.com/go-stack/stack v1.8.0
 	github.com/gofrs/uuid v3.3.0+incompatible
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/klauspost/compress v1.11.3 // indirect

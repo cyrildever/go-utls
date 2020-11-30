@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/go-stack/stack"
 )
 
 const defaultLogFile = "logger.log"
@@ -102,11 +104,11 @@ func (l *logger) init() {
 	l.shared = strings.Join(ctxs, " ")
 
 	// stderr
-	l.dbug.stderr = log.New(os.Stderr, LvlDebug.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile)
-	l.info.stderr = log.New(os.Stderr, LvlInfo.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile)
-	l.warn.stderr = log.New(os.Stderr, LvlWarn.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile)
-	l.eror.stderr = log.New(os.Stderr, LvlError.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile)
-	l.crit.stderr = log.New(os.Stderr, LvlCrit.String(), log.Ldate|log.Lmicroseconds|log.Lshortfile)
+	l.dbug.stderr = log.New(os.Stderr, LvlDebug.String(), log.Ldate|log.Lmicroseconds)
+	l.info.stderr = log.New(os.Stderr, LvlInfo.String(), log.Ldate|log.Lmicroseconds)
+	l.warn.stderr = log.New(os.Stderr, LvlWarn.String(), log.Ldate|log.Lmicroseconds)
+	l.eror.stderr = log.New(os.Stderr, LvlError.String(), log.Ldate|log.Lmicroseconds)
+	l.crit.stderr = log.New(os.Stderr, LvlCrit.String(), log.Ldate|log.Lmicroseconds)
 
 	// file
 	file, err := os.OpenFile(l.filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -148,6 +150,10 @@ func (l *logger) write(lvl Lvl, msg string, ctx []interface{}) {
 		logs = append(logs, fmt.Sprintf("%s=\"%v\"", ctx[i], ctx[i+1]))
 	}
 	logs = append(logs, msg)
+	s := stack.Trace().TrimBelow(stack.Caller(2)).TrimRuntime()
+	if len(s) > 0 {
+		logs = append(logs, s.String())
+	}
 	lg := strings.Join(logs, " ")
 	switch lvl {
 	case LvlDebug:
