@@ -26,7 +26,7 @@ This repository contains the following modules:
 - a few common utility sub-modules:
   * `concurrent`: to handle concurrent maps and slices;
   * `file`: to find, know existence or get lines from files;
-  * `logger`: a wrapper to the [`github.com/inconshreveable/log15`](https://github.com/inconshreveable/log15) module;
+  * `logger`: a wrapper to the `log` package to output logs to stderr and a file;
   * `ntp`: another small wrapper to handle time with NTP;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, ...);
   * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, back-and-forth conversions of byte arrays (to string, number, etc.), ...);
