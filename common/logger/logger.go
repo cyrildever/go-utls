@@ -101,7 +101,7 @@ func (l *logger) init() {
 	for i := 0; i < len(l.ctx); i += 2 {
 		ctxs = append(ctxs, fmt.Sprintf("%s=%v", l.ctx[i], l.ctx[i+1]))
 	}
-	l.shared = strings.Join(ctxs, " ")
+	l.shared = strings.Join(ctxs, "\t")
 
 	// stderr
 	l.dbug.stderr = log.New(os.Stderr, LvlDebug.String(), log.Ldate|log.Lmicroseconds)
@@ -145,16 +145,16 @@ func (l *logger) Crit(msg string, ctx ...interface{}) {
 }
 
 func (l *logger) write(lvl Lvl, msg string, ctx []interface{}) {
-	logs := []string{l.shared}
+	logs := []string{fmt.Sprintf("msg={\u0002%s\u0003}", msg)}
+	logs = append(logs, l.shared)
 	for i := 0; i < len(ctx); i += 2 {
 		logs = append(logs, fmt.Sprintf("%s=\"%v\"", ctx[i], ctx[i+1]))
 	}
-	logs = append(logs, msg)
 	s := stack.Trace().TrimBelow(stack.Caller(2)).TrimRuntime()
 	if len(s) > 0 {
 		logs = append(logs, s.String())
 	}
-	lg := strings.Join(logs, " ")
+	lg := strings.Join(logs, "\t")
 	switch lvl {
 	case LvlDebug:
 		l.dbug.stderr.Println(lg)

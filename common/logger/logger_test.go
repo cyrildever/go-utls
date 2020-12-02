@@ -7,7 +7,7 @@ import (
 )
 
 func TestLog(t *testing.T) {
-	log := logger.Init("logger_test", "TestLogger", "test.log")
+	log := logger.Init("logger_test", "TestLogger", "./test.log")
 	log.Debug("Test debug")
 	log.Info("Test info")
 	log.Warn("Test warn")
