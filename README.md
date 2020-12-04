@@ -29,7 +29,7 @@ This repository contains the following modules:
   * `logger`: a wrapper to the `log` package to output logs to stderr and a file;
   * `ntp`: another small wrapper to handle time with NTP;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, ...);
-  * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, back-and-forth conversions of byte arrays (to string, number, etc.), ...);
+  * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, `Capitalize()`, back-and-forth conversions of byte arrays (to string, number, etc.), ...);
   * `xor`: to apply XOR operation to strings or byte arrays.
 
 
