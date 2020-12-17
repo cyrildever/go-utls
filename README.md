@@ -25,6 +25,7 @@ This repository contains the following modules:
 - `normalizer`: the adaptation of my Empreinte Sociométrique&trade; patented work for normalizing contact data (see its specific [README](normalizer/README.md) or use its TypeScript equivalent on NPM: [`es-normalizer`](https://www.npmjs.com/package/es-normalizer));
 - a few common utility sub-modules:
   * `concurrent`: to handle concurrent maps and slices;
+  * `event`: a simple event bus manager;
   * `file`: to find, know existence or get lines from files;
   * `logger`: a wrapper to the `log` package to output logs to stderr and a file;
   * `ntp`: another small wrapper to handle time with NTP;
