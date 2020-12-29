@@ -31,8 +31,8 @@ func TestInvalidKeyPair(t *testing.T) {
 
 // TestKeypair ...
 func TestKeypair(t *testing.T) {
-	// From seed
-	seed := utils.Must(utils.FromHex("e5dcc2bdf7310ea3abc82a3580621bd0a487c181113d889d0775d3f8eba21e84"))
+	// From seeds
+	seed := utils.Must(utils.FromHex("e5dcc2bdf7310ea3abc82a3580621bd0a487c181113d889d0775d3f8eba21e84")) // Should actually be the master key in Rooot
 
 	pk1, sk1, _ := crypto.GenerateKeyPair(seed, crypto.Path("m/0'/0/0"))
 	pubkey1 := utils.ToHex(pk1)

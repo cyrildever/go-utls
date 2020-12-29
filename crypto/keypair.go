@@ -5,7 +5,7 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"errors"
+	"fmt"
 	"math/big"
 
 	"github.com/cyrildever/go-utls/common/utils"
@@ -16,12 +16,13 @@ import (
 
 const (
 	//--- ERROR MESSAGES
-	invalidKeysErrorTxt = "Invalid EC keys"
+	invalidKeysErrorTxt = "invalid EC keys"
 )
 
-// GenerateKeyPair is the function that should be used whenever a keypair is needed in the rooot&trade; project.
+// GenerateKeyPair is the function that should be used whenever a keypair is needed in the Rooot project.
 //
-// It takes a seed and a BIP32 path, and returns a keypair in byte array, decompressed public and private, and an error if any.
+// It takes a seed (ie. the master key in Rooot) and a BIP-32 path, and returns a keypair in byte array, decompressed public and private,
+// and an error if any.
 // As of the latest version in the system, this keypair operates on Bitcoin's secp256k1 elliptic curve.
 // It shall be used for either signing with ECDSA or encrypting/decrypting with ECIES.
 // One should use the utils.ToHex() utility method to save any of these byte arrays as their hexadecimal string representation if needed.
@@ -131,12 +132,12 @@ func ECIESKeyPairFrom(ecdsaPublicKBytes, ecdsaPrivateKBytes []byte) (pubkey ecie
 	}
 	privkey = (*ecies.ImportECDSA(&sk))
 	if !privkey.IsOnCurve(privkey.X, privkey.Y) {
-		err = errors.New(invalidKeysErrorTxt + ": invalid private key")
+		err = fmt.Errorf("%s: invalid private key", invalidKeysErrorTxt)
 		return
 	}
 
 	if !IsCompatibleKeyPair(ecdsaPublicKBytes, ecdsaPrivateKBytes) {
-		err = errors.New(invalidKeysErrorTxt + ": incompatible keys")
+		err = fmt.Errorf("%s: incompatible keys", invalidKeysErrorTxt)
 		return
 	}
 
@@ -147,7 +148,7 @@ func ECIESKeyPairFrom(ecdsaPublicKBytes, ecdsaPrivateKBytes []byte) (pubkey ecie
 func ECDSAPublicKeyFrom(publicKeyBytes []byte) (pk ecdsa.PublicKey, err error) {
 	x, y := elliptic.Unmarshal(secp256k1.S256(), publicKeyBytes)
 	if x == nil || y == nil {
-		err = errors.New(invalidKeysErrorTxt + ": invalid public key")
+		err = fmt.Errorf("%s: invalid ECDSA public key", invalidKeysErrorTxt)
 		return
 	}
 	pk = ecdsa.PublicKey{
