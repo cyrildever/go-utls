@@ -27,7 +27,7 @@ This repository contains the following modules:
   * `caller`: to get information about the location of the calling function (file name and line number);
   * `concurrent`: to handle concurrent maps and slices;
   * `event`: a simple event bus manager;
-  * `file`: to find, know existence or get lines from files;
+  * `file`: to find, truncate, know existence, delete or get lines from files;
   * `logger`: a wrapper to the `log` package to output logs to stderr and a file;
   * `ntp`: another small wrapper to handle time with NTP;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, ...);

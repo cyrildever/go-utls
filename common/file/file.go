@@ -5,6 +5,14 @@ import (
 	"os"
 )
 
+// Delete ...
+func Delete(filename string) error {
+	if !Exists(filename) {
+		return nil
+	}
+	return os.Remove(filename)
+}
+
 // Exists ...
 func Exists(filename string) bool {
 	info, err := os.Stat(filename)
@@ -45,4 +53,16 @@ func GetLines(filename string) (lines []string, err error) {
 	}
 
 	return
+}
+
+// Truncate erases the content of a file without remove the file itself
+func Truncate(filename string, perm os.FileMode) error {
+	f, err := os.OpenFile(filename, os.O_TRUNC, perm)
+	if err != nil {
+		return err
+	}
+	if err = f.Close(); err != nil {
+		return err
+	}
+	return nil
 }
