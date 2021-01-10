@@ -30,8 +30,8 @@ This repository contains the following modules:
   * `file`: to find, truncate, know existence, delete or get lines from files;
   * `logger`: a wrapper to the `log` package to output logs to stderr and a file;
   * `ntp`: another small wrapper to handle time with NTP;
-  * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, ...);
-  * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, `Capitalize()`, back-and-forth conversions of byte arrays (to string, number, etc.), ...);
+  * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, &mldr;);
+  * `utils`: a bunch of useful utility functions (`Flatten()`, `EuclideanDivision()`, `FromHex()`/`ToHex()`, `Capitalize()`, back-and-forth conversions of byte arrays (to string, number, etc.), &mldr;);
   * `xor`: to apply XOR operation to strings or byte arrays.
 
 
