@@ -7,6 +7,19 @@ import (
 	"gotest.tools/assert"
 )
 
+// TestNext ...
+func TestNext(t *testing.T) {
+	ref := crypto.Path("m/1'/0/0")
+	p := crypto.Path("m/0'/65535/2097151")
+	next, err := p.Next()
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, ref, next)
+	nextOne, _ := next.Next()
+	assert.Equal(t, nextOne.String(), "m/1'/0/1")
+}
+
 // TestParse ...
 func TestParse(t *testing.T) {
 	ref := crypto.Indices{
@@ -24,4 +37,14 @@ func TestParse(t *testing.T) {
 		t.Fatal(err)
 	}
 	assert.Equal(t, ref, indices)
+}
+
+// TestString ...
+func TestString(t *testing.T) {
+	defaut := "m/0'/0/0"
+	assert.Equal(t, crypto.Path(defaut).String(), defaut)
+
+	wrong := crypto.Path("not a path")
+	assert.Assert(t, wrong.IsEmpty())
+	assert.Equal(t, wrong.String(), "")
 }
