@@ -6,7 +6,7 @@ require (
 	github.com/andybalholm/brotli v1.0.1 // indirect
 	github.com/beevik/ntp v0.3.0
 	github.com/btcsuite/btcd v0.21.0-beta // indirect
-	github.com/elliotchance/orderedmap v1.3.0
+	github.com/elliotchance/orderedmap v1.4.0
 	github.com/ethereum/go-ethereum v1.9.25
 	github.com/fatih/color v1.10.0
 	github.com/go-stack/stack v1.8.0
@@ -17,9 +17,8 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/metakeule/fmtdate v1.1.2
 	github.com/sammyne/bip32 v1.0.1
-	github.com/stretchr/testify v1.7.0 // indirect
-	github.com/tidwall/pretty v1.0.2 // indirect
-	github.com/valyala/fasthttp v1.19.0
+	github.com/tidwall/pretty v1.0.5 // indirect
+	github.com/valyala/fasthttp v1.20.0
 	github.com/vmihailenco/msgpack v4.0.4+incompatible
 	go.mongodb.org/mongo-driver v1.4.6
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
