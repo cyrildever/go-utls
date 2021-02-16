@@ -3,7 +3,7 @@ package packer
 import (
 	"encoding/json"
 
-	"github.com/vmihailenco/msgpack"
+	msgpack "github.com/vmihailenco/msgpack/v5"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
