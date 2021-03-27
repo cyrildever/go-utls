@@ -56,4 +56,12 @@ func TestComplement(t *testing.T) {
 	cpCompl := xor.Complement(codePlus)
 	cpComplCompl, _ := xor.Bytes(xor.Complement(code), xor.Complement(plus))
 	assert.Assert(t, string(cpCompl) != string(cpComplCompl))
+
+	str := "abc"
+	neutral := xor.Neutral(str)
+	found, err := xor.String(str, string(neutral))
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, found, str)
 }

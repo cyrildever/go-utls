@@ -51,6 +51,11 @@ func Complement(item []byte) []byte {
 	return complement
 }
 
+// Neutral returns the neutral element for the passed item
+func Neutral(item string) []byte {
+	return make([]byte, len(item))
+}
+
 // NotSameLengthError ...
 type NotSameLengthError struct {
 	message string
