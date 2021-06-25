@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/go-stack/stack"
 )
@@ -174,6 +175,8 @@ func (l *logger) write(lvl Lvl, msg string, ctx []interface{}) {
 	}
 }
 
+//-- FUNCTIONS
+
 // New ...
 func New(filename string, ctx ...interface{}) Logger {
 	if len(ctx)%2 != 0 {
@@ -185,4 +188,13 @@ func New(filename string, ctx ...interface{}) Logger {
 	}
 	child.init()
 	return child
+}
+
+// GetTimeFromLine ...
+func GetTimeFromLine(input string) (t time.Time) {
+	tm, err := time.Parse("2006/01/02 15:04:05.999999999-07:00", input[:26]+"000+02:00")
+	if err != nil {
+		return
+	}
+	return tm
 }
