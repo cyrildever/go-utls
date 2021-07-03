@@ -18,12 +18,12 @@ require (
 	github.com/metakeule/fmtdate v1.1.2
 	github.com/sammyne/bip32 v1.0.1
 	github.com/tidwall/pretty v1.2.0 // indirect
-	github.com/valyala/fasthttp v1.27.0
+	github.com/valyala/fasthttp v1.28.0
 	github.com/vmihailenco/msgpack/v5 v5.3.4
-	go.mongodb.org/mongo-driver v1.5.3
+	go.mongodb.org/mongo-driver v1.5.4
 	golang.org/x/crypto v0.0.0-20210616213533-5ff15b29337e // indirect
 	golang.org/x/net v0.0.0-20210614182718-04defd469f4e // indirect
-	golang.org/x/sys v0.0.0-20210616094352-59db8d763f22 // indirect
+	golang.org/x/sys v0.0.0-20210630005230-0f9fa26af87c // indirect
 	golang.org/x/text v0.3.6
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
