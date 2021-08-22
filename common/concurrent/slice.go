@@ -8,10 +8,15 @@ import (
 	cerrors "github.com/cyrildever/go-utls/common/concurrent/errors"
 )
 
+//--- TYPES
+
 // Slice type that can be safely shared between goroutines
 type Slice struct {
 	sync.RWMutex
-	items []interface{}
+	items         []interface{}
+	hasInitLength bool
+	lastIndex     int
+	length        int
 }
 
 // SliceItem is a concurrent slice item
@@ -24,12 +29,24 @@ type SliceItem struct {
 // It should be passed as parameter at the Check() or Get() methods.
 type Checker func(interface{}, interface{}) bool
 
+//--- METHODS
+
 // Append adds an item to the concurrent slice
 func (cs *Slice) Append(item interface{}) {
 	cs.Lock()
 	defer cs.Unlock()
 
-	cs.items = append(cs.items, item)
+	if !cs.hasInitLength {
+		cs.items = append(cs.items, item)
+	} else {
+		if cs.lastIndex < cs.length {
+			cs.items[cs.lastIndex] = item
+			cs.lastIndex++
+		} else {
+			cs.items = append(cs.items, item)
+			cs.hasInitLength = false
+		}
+	}
 }
 
 // Get will return the interface corresponding with the value and the Checker given.
@@ -128,6 +145,20 @@ func (cs *Slice) GetAll() ([]interface{}, bool) {
 	return nil, false
 }
 
+// GetAt returns the item at the passed index
+//
+// NB: It returns nil if the index is out of bound or there is no item
+func (cs *Slice) GetAt(index int) interface{} {
+	cs.RLock()
+	defer cs.RUnlock()
+
+	if index < 0 || index >= len(cs.items) {
+		return nil
+	}
+
+	return cs.items[index]
+}
+
 // GetOne returns one random item
 func (cs *Slice) GetOne() (interface{}, bool) {
 	cs.RLock()
@@ -203,4 +234,23 @@ func (cs *Slice) size() int {
 
 func (cs *Slice) clear() {
 	(*cs).items = []interface{}{}
+}
+
+//--- FUNCTIONS
+
+// NewSlice ...
+func NewSlice(size ...int) *Slice {
+	var items []interface{}
+	hasInitLength := false
+	length := 0
+	if len(size) > 0 && size[0] > 0 {
+		length = size[0]
+		items = make([]interface{}, length)
+		hasInitLength = true
+	}
+	return &Slice{
+		items:         items,
+		hasInitLength: hasInitLength,
+		length:        length,
+	}
 }

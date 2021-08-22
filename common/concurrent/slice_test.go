@@ -1,12 +1,40 @@
 package concurrent_test
 
 import (
+	"strconv"
 	"testing"
+	"time"
 
 	"github.com/cyrildever/go-utls/common/concurrent"
 	"github.com/cyrildever/go-utls/common/concurrent/errors"
 	"gotest.tools/assert"
 )
+
+// TestNewSlice ...
+func TestNewSlice(t *testing.T) {
+	item := "item"
+	length := 1000000
+
+	s1 := concurrent.Slice{}
+	t0 := time.Now()
+	for i := 0; i < length; i++ {
+		s1.Append(item + strconv.Itoa(i))
+	}
+	t1 := time.Since(t0)
+
+	s2 := concurrent.NewSlice(length)
+	t0 = time.Now()
+	for i := 0; i < length; i++ {
+		s2.Append(item + strconv.Itoa(i))
+	}
+	t2 := time.Since(t0)
+
+	assert.Equal(t, s1.Size(), s2.Size())
+	assert.Assert(t, t2.Nanoseconds() < t1.Nanoseconds())
+	assert.Assert(t, s1.GetAt(0) == s2.GetAt(0))
+	assert.Assert(t, s1.GetAt(length) == nil)
+	assert.Assert(t, s2.GetAt(length) == nil)
+}
 
 // TestAddAndPop ...
 func TestAddAndPop(t *testing.T) {
