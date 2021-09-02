@@ -18,3 +18,11 @@ func TestCapitalize(t *testing.T) {
 	assert.Assert(t, capitalized != titled)
 	assert.Equal(t, titled, "My Capitalized Sentence")
 }
+
+// TestToUTF8 ...
+func TestToUTF8(t *testing.T) {
+	ref := "just for showing"
+	decoded, err := utils.ToUTF8(ref, utils.WINDOWS_1252)
+	assert.NilError(t, err)
+	assert.Equal(t, ref, decoded)
+}
