@@ -25,4 +25,7 @@ func TestToUTF8(t *testing.T) {
 	decoded, err := utils.ToUTF8(ref, utils.WINDOWS_1252)
 	assert.NilError(t, err)
 	assert.Equal(t, ref, decoded)
+
+	_, err = utils.ToUTF8(ref, "wrong format")
+	assert.Error(t, err, "unsupported format")
 }

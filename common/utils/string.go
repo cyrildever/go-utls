@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"errors"
 	"io/ioutil"
 	"strings"
 
@@ -27,8 +28,14 @@ var (
 )
 
 // ToUTF8 transforms a encoded string in the passed format to a UTF-8 string
+//
+// NB: For now, it only supports ISO 8859-3 and Windows 1252 formats
 func ToUTF8(encoded, format string) (decoded string, err error) {
-	foundReader, err := charset.NewReader(strings.NewReader(encoded), charmap.Windows1252.String())
+	if format != ISO_8859_3 && format != WINDOWS_1252 {
+		err = errors.New("unsupported format")
+		return
+	}
+	foundReader, err := charset.NewReader(strings.NewReader(encoded), format)
 	if err != nil {
 		return
 	}
