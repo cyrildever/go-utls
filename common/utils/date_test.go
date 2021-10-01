@@ -29,4 +29,10 @@ func TestDateFormat(t *testing.T) {
 	assert.NilError(t, err)
 	thisTimeFormatted := utils.DateFormat(thisTime, java)
 	assert.Equal(t, thisTimeFormatted, "20211001125613")
+
+	java = "HH"
+	thisTime, err = time.Parse("2006-01-02 15:04:05", "2021-10-01 12:56:13")
+	assert.NilError(t, err)
+	thisTimeFormatted = utils.DateFormat(thisTime, java)
+	assert.Equal(t, thisTimeFormatted, "12")
 }

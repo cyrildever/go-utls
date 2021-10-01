@@ -19,6 +19,8 @@ func DateLayoutJava2Go(layout string) string {
 		goLayout = strings.Replace(layout, "yyyy", "2006", 1)
 	} else if strings.Contains(layout, "yy") {
 		goLayout = strings.Replace(layout, "yy", "06", 1)
+	} else {
+		goLayout = layout
 	}
 	// Month
 	if strings.Contains(goLayout, "MMMM") {
