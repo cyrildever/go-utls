@@ -5,6 +5,10 @@ import (
 	"time"
 )
 
+const (
+	ISO_8601 = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+)
+
 // DateFormat formats the passed time to the Java-notated layout, eg. `yyyy-MM-dd`
 func DateFormat(t time.Time, layout string) string {
 	goLayout := DateLayoutJava2Go(layout)
