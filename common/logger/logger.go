@@ -12,10 +12,21 @@ import (
 
 const defaultLogFile = "logger.log"
 
+var useFile = true
+
+const (
+	NO_FILE = "true"
+)
+
 // Init instantiates the logger with the specified arguments.
+//
 // The first `args` parameter is the logger filename (default: logger.log).
 //
-// IMPORTANT: The logger will log to stderr and to the file.
+// The second `args` parameter indicates whether to get rid of any file logging (default: "false").
+// You might want to use the `logger.NO_FILE` constant as this second parameter or the string "true", eg.
+//	log := logger.Init("my_package", "MyFunction", "", logger.NO_FILE)
+//
+// IMPORTANT: The logger will log to stderr and to the file unless stated otherwise.
 func Init(serviceName, contextName string, args ...string) Logger {
 	var filename string
 	if len(args) == 0 || args[0] == "" {
@@ -23,6 +34,11 @@ func Init(serviceName, contextName string, args ...string) Logger {
 	} else {
 		filename = args[0]
 	}
+
+	if len(args) > 1 && args[1] == NO_FILE {
+		useFile = false
+	}
+
 	return New(filename, "service", serviceName, "context", contextName)
 }
 
@@ -112,17 +128,19 @@ func (l *logger) init() {
 	l.crit.stderr = log.New(os.Stderr, LvlCrit.String(), log.Ldate|log.Lmicroseconds)
 
 	// file
-	file, err := os.OpenFile(l.filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Println(err)
-	}
-	f = file
+	if useFile {
+		file, err := os.OpenFile(l.filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			log.Println(err)
+		}
+		f = file
 
-	l.dbug.file = log.New(f, LvlDebug.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
-	l.info.file = log.New(f, LvlInfo.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
-	l.warn.file = log.New(f, LvlWarn.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
-	l.eror.file = log.New(f, LvlError.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
-	l.crit.file = log.New(f, LvlCrit.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+		l.dbug.file = log.New(f, LvlDebug.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+		l.info.file = log.New(f, LvlInfo.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+		l.warn.file = log.New(f, LvlWarn.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+		l.eror.file = log.New(f, LvlError.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+		l.crit.file = log.New(f, LvlCrit.String(), log.Ldate|log.Lmicroseconds|log.Lmsgprefix)
+	}
 }
 
 func (l *logger) Debug(msg string, ctx ...interface{}) {
@@ -159,19 +177,29 @@ func (l *logger) write(lvl Lvl, msg string, ctx []interface{}) {
 	switch lvl {
 	case LvlDebug:
 		l.dbug.stderr.Println(lg)
-		l.dbug.file.Println(lg)
+		if useFile {
+			l.dbug.file.Println(lg)
+		}
 	case LvlInfo:
 		l.info.stderr.Println(lg)
-		l.info.file.Println(lg)
+		if useFile {
+			l.info.file.Println(lg)
+		}
 	case LvlWarn:
 		l.warn.stderr.Println(lg)
-		l.warn.file.Println(lg)
+		if useFile {
+			l.warn.file.Println(lg)
+		}
 	case LvlError:
 		l.eror.stderr.Println(lg)
-		l.eror.file.Println(lg)
+		if useFile {
+			l.eror.file.Println(lg)
+		}
 	case LvlCrit:
 		l.crit.stderr.Println(lg)
-		l.crit.file.Println(lg)
+		if useFile {
+			l.crit.file.Println(lg)
+		}
 	}
 }
 
