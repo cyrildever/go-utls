@@ -28,7 +28,7 @@ This repository contains the following modules:
   * `concurrent`: to handle concurrent maps and slices (with faster slice appending when its length is set at instantiation through the `concurrent.NewSlice` function);
   * `event`: a simple event bus manager;
   * `file`: to find, truncate, know existence, delete or get lines from files;
-  * `logger`: a wrapper to the `log` package to output logs to stderr and a file;
+  * `logger`: a wrapper to the `log` package to output logs to stderr and optionally a file;
   * `ntp`: another small wrapper to handle time with NTP;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, &mldr;);
   * `utils`: a bunch of useful utility functions (`Capitalize()`, `Chunk()`, `DateFormat()` from Java notation, `EuclideanDivision()`, `Flatten()`, `FromHex()`/`ToHex()`, back-and-forth conversions of byte arrays (to string, number, etc.), `IsPointer()`/`IsValue()` test methods, `ToUTF8()` string formatting, &mldr;);

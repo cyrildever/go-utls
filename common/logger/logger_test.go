@@ -3,18 +3,24 @@ package logger_test
 import (
 	"testing"
 
+	"github.com/cyrildever/go-utls/common/file"
 	"github.com/cyrildever/go-utls/common/logger"
 	"gotest.tools/assert"
 )
 
 // TestLog ...
 func TestLog(t *testing.T) {
-	log := logger.Init("logger_test", "TestLogger", "./test.log")
+	log := logger.Init("logger_test", "TestLog", "./test.log")
 	log.Debug("Test debug")
 	log.Info("Test info")
 	log.Warn("Test warn")
 	log.Error("Test error")
 	log.Crit("Test crit")
+
+	noFile := "./no_file.log"
+	log = logger.Init("logger_test", "TestLog", noFile, logger.NO_FILE)
+	log.Debug("Test debug no file")
+	assert.Assert(t, !file.Exists(noFile))
 
 	// assert.Assert(t, false)
 }
