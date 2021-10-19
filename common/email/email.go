@@ -44,9 +44,13 @@ func (e Email) String() string {
 //--- FUNCTIONS
 
 // NewEmail ...
-func NewEmail(address, displayName string) *Email {
+func NewEmail(address string, displayName ...string) *Email {
+	var name string
+	if len(displayName) > 0 && displayName[0] != "" {
+		name = displayName[0]
+	}
 	return &Email{
 		Address: address,
-		Name:    displayName,
+		Name:    name,
 	}
 }

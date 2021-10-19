@@ -9,26 +9,61 @@ import (
 
 // TestEmail ...
 func TestEmail(t *testing.T) {
-	ref := "Cyril Dever <cdever@edgewhere.fr>"
+	ref := "John Doe <john@doe.com>"
+	adrs := "john@doe.com"
 
-	mail := email.NewEmail("cdever@edgewhere.fr", "Cyril Dever")
+	mail := email.NewEmail(adrs, "John Doe")
 	assert.Equal(t, mail.String(), ref)
+
+	noDisplay := email.NewEmail(adrs)
+	assert.Equal(t, noDisplay.String(), adrs)
 }
 
-// NB: To make it work, turn on 'Autoriser les applications moins sécurisées' in Google account, uncomment all and fill in the password field
+// NB: To make it work, provided you are in the 'eu-west-3' region, fill in the appropriate AWS Simple Email Service SMTP credentials
+// (@see https://eu-west-3.console.aws.amazon.com/ses/home?region=eu-west-3#smtp-settings:)
+//
+// Furthermore, while still in AWS Sandbox mode, each email must have been verified beforehand through the AWS SES console
+// (@see https://eu-west-3.console.aws.amazon.com/ses/home?region=eu-west-3#verified-senders-email:)
+func TestSend(t *testing.T) {
+	username := "" // Your AWS SES username
+	password := "" // Your AWS SES password
+
+	if username == "" || password == "" {
+		assert.Assert(t, true) // To avoid breaking the tests
+		return
+	}
+
+	to := []email.Email{
+		{
+			Address: "cdever@edgewhere.fr", // AWS verified e-mail
+			Name:    "Cyril Dever",
+		},
+	}
+	client := email.NewClient(username, password, "email-smtp.eu-west-3.amazonaws.com", 587) // Adapt to own region
+	sender := email.NewEmail("support@edgewhere.fr", "Support Edgewhere")                    // AWS verified e-mail
+	msg := "Ceci est un test en UTF-8\n" +
+		"sur plusieurs lignes.\n\n" +
+		"Votre équipe Edgewhere"
+	recipients, err := client.Send("Test via AWS", msg, *sender, to)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, len(recipients), len(to))
+}
+
+// NB: To make it work, turn on 'Authorize less secure applications' in your Google account, uncomment all and fill in the credentials
 // func TestSend(t *testing.T) {
-// 	username := "cdever@edgewhere.fr"
-// 	password := ""
+// 	username := "" // Your Gmail e-mail address
+// 	password := "" // Your Gmail password
 
 // 	to := []email.Email{
 // 		{
 // 			Address: "support@edgewhere.fr",
 // 			Name:    "Support Edgewhere",
 // 		},
-// 		{
 // 	}
 // 	client := email.NewClient(username, password, "smtp.gmail.com", 587)
-// 	recipients, err := client.Send("Test", "Ceci est un test", email.Email{Address: username, Name: "Cyril Dever"}, to)
+// 	recipients, err := client.Send("Test via Gmail", "Ceci est un test", email.Email{Address: username, Name: "Your Name"}, to)
 // 	if err != nil {
 // 		t.Fatal(err)
 // 	}
