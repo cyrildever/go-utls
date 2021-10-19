@@ -28,6 +28,7 @@ func (c Client) Send(subject, body string, from Email, to []Email) (recipients [
 	msg := fmt.Sprintf("From: %s\r\n", from.String()) +
 		fmt.Sprintf("To: %s\r\n", strings.Join(recipients, ",")) +
 		fmt.Sprintf("Subject: %s\r\n", subject) +
+		"Content-Type: text/plain; charset=UTF-8\r\n" +
 		"\r\n" +
 		fmt.Sprintf("%s\r\n", body)
 
