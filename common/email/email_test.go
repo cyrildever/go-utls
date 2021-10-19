@@ -19,17 +19,20 @@ func TestEmail(t *testing.T) {
 	assert.Equal(t, noDisplay.String(), adrs)
 }
 
+// TestSendAWS ...
+//
 // NB: To make it work, provided you are in the 'eu-west-3' region, fill in the appropriate AWS Simple Email Service SMTP credentials
 // (@see https://eu-west-3.console.aws.amazon.com/ses/home?region=eu-west-3#smtp-settings:)
 //
-// Furthermore, while still in AWS Sandbox mode, each email must have been verified beforehand through the AWS SES console
+// Furthermore, while still in AWS Sandbox mode, each email must have been verified beforehand via the AWS SES console
 // (@see https://eu-west-3.console.aws.amazon.com/ses/home?region=eu-west-3#verified-senders-email:)
-func TestSend(t *testing.T) {
+func TestSendAWS(t *testing.T) {
 	username := "" // Your AWS SES username
 	password := "" // Your AWS SES password
 
 	if username == "" || password == "" {
 		assert.Assert(t, true) // To avoid breaking the tests
+		t.Log("Empty credentials in TestSendAWS")
 		return
 	}
 
@@ -51,21 +54,29 @@ func TestSend(t *testing.T) {
 	assert.Equal(t, len(recipients), len(to))
 }
 
+// TestSendGmail ...
+//
 // NB: To make it work, turn on 'Authorize less secure applications' in your Google account, uncomment all and fill in the credentials
-// func TestSend(t *testing.T) {
-// 	username := "" // Your Gmail e-mail address
-// 	password := "" // Your Gmail password
+func TestSendGmail(t *testing.T) {
+	username := "" // Your Gmail e-mail address
+	password := "" // Your Gmail password
 
-// 	to := []email.Email{
-// 		{
-// 			Address: "support@edgewhere.fr",
-// 			Name:    "Support Edgewhere",
-// 		},
-// 	}
-// 	client := email.NewClient(username, password, "smtp.gmail.com", 587)
-// 	recipients, err := client.Send("Test via Gmail", "Ceci est un test", email.Email{Address: username, Name: "Your Name"}, to)
-// 	if err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	assert.Equal(t, len(recipients), len(to))
-// }
+	if username == "" || password == "" {
+		assert.Assert(t, true) // To avoid breaking the tests
+		t.Log("Empty credentials in TestSendGmail")
+		return
+	}
+
+	to := []email.Email{
+		{
+			Address: "support@edgewhere.fr",
+			Name:    "Support Edgewhere",
+		},
+	}
+	client := email.NewClient(username, password, "smtp.gmail.com", 587)
+	recipients, err := client.Send("Test via Gmail", "Ceci est un test", email.Email{Address: username, Name: "Your Test Name"}, to)
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, len(recipients), len(to))
+}
