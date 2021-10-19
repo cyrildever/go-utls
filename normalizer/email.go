@@ -12,8 +12,13 @@ var reEmail = regexp.MustCompile("^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!
 var Email SimpleNormalizer = func(input string) (string, error) {
 	// see https://emailregex.com/
 	processed := strings.ToLower(strings.TrimSpace(input))
-	if len(processed) > 255 || !reEmail.MatchString(processed) {
+	if !IsValidEmail(processed) {
 		return "", errors.New("invalid email")
 	}
 	return processed, nil
+}
+
+// IsValidEmail ...
+func IsValidEmail(val string) bool {
+	return len(val) <= 255 && reEmail.MatchString(val)
 }

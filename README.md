@@ -26,6 +26,7 @@ This repository contains the following modules:
 - a few utility sub-modules:
   * `caller`: to get information about the location of the calling function (file name and line number);
   * `concurrent`: to handle concurrent maps and slices (with faster slice appending when its length is set at instantiation through the `concurrent.NewSlice` function);
+  * `email`: my "quick-and-dirty" SMTP client;
   * `event`: a simple event bus manager;
   * `file`: to find, truncate, know existence, delete or get lines from files;
   * `logger`: a wrapper to the `log` package to output logs to stderr and optionally a file;

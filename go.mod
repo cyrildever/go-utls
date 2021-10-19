@@ -10,7 +10,7 @@ require (
 	github.com/ethereum/go-ethereum v1.10.10
 	github.com/fatih/color v1.13.0
 	github.com/go-stack/stack v1.8.1
-	github.com/gofrs/uuid v4.0.0+incompatible
+	github.com/gofrs/uuid v4.1.0+incompatible
 	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect
 	github.com/metakeule/fmtdate v1.1.2
@@ -20,8 +20,8 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.3.4
 	go.mongodb.org/mongo-driver v1.7.3
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
-	golang.org/x/net v0.0.0-20211014222326-fd004c51d1d6
-	golang.org/x/sys v0.0.0-20211013075003-97ac67df715c // indirect
+	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
+	golang.org/x/sys v0.0.0-20211015200801-69063c4bb744 // indirect
 	golang.org/x/text v0.3.7
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	gotest.tools v2.2.0+incompatible
