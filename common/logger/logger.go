@@ -164,7 +164,7 @@ func (l *logger) Crit(msg string, ctx ...interface{}) {
 }
 
 func (l *logger) write(lvl Lvl, msg string, ctx []interface{}) {
-	logs := []string{fmt.Sprintf("msg={\u0002%s\u0003}", msg)}
+	logs := []string{fmt.Sprintf("msg={ %s }", msg)}
 	logs = append(logs, l.shared)
 	for i := 0; i < len(ctx); i += 2 {
 		logs = append(logs, fmt.Sprintf("%s=\"%v\"", ctx[i], ctx[i+1]))
