@@ -34,24 +34,24 @@ type Model interface {
 func ToModel(bytes []byte, typeName string) (m Model, err error) {
 	// TODO Enrich for each new type
 	switch strings.ToLower(typeName) {
-	case "base64":
+	case BASE_64:
 		m = ToBase64(bytes)
-	case "binary":
+	case BINARY:
 		m = ToBinary(bytes)
-	case "bits8":
+	case BITS_8:
 		m = ToBits8(bytes)
-	case "ciphered":
+	case CIPHERED:
 		m = ToCiphered(bytes)
-	case "hash":
+	case HASH:
 		m = ToHash(bytes)
-	case "key":
+	case KEY:
 		m = ToKey(bytes)
-	case "signature":
+	case SIGNATURE:
 		m = ToSignature(bytes)
-	case "uuid":
+	case UUID_TYPE:
 		m = ToUUID(bytes)
 	default:
-		err = errors.New("Invalid type")
+		err = errors.New("invalid type")
 	}
 	return
 }

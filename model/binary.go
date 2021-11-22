@@ -7,6 +7,10 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+const (
+	BINARY = "binary"
+)
+
 //--- TYPES
 
 // Binary is the string representation of a binary literal, eg. Binary("1001") would equal to `0b1001` in other languages or starting with version 1.13 of Golang.

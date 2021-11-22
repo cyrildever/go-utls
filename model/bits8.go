@@ -6,6 +6,10 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+const (
+	BITS_8 = "bits8"
+)
+
 //--- TYPES
 
 // Bits8 is an 8-bit representation of a bit set, ie. a single byte/octet

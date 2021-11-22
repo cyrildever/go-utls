@@ -6,6 +6,10 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+const (
+	CIPHERED = "ciphered"
+)
+
 //--- TYPES
 
 // Ciphered is the base64 string representation of a ciphered text.

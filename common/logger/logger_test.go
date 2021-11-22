@@ -27,7 +27,7 @@ func TestLog(t *testing.T) {
 
 // TestLoggerTimeFromLine ...
 func TestLoggerGetTimeFromLine(t *testing.T) {
-	logLine := `2021/06/16 08:30:37.220607 DEBUG msg={Test debug}	service=logger_test	context=TestLogger	[logger_test.go:11]`
+	logLine := `2021/06/16 08:30:37.220607 DEBUG msg={ Test debug }	service=logger_test	context=TestLogger	[logger_test.go:11]`
 	found := logger.GetTimeFromLine(logLine)
 	assert.Equal(t, found.Year(), 2021)
 	assert.Equal(t, found.Month().String(), "June")

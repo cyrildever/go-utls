@@ -4,6 +4,10 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+const (
+	SIGNATURE = "signature"
+)
+
 //--- TYPES
 
 // Signature is the hexadecimal string representation of a signature.

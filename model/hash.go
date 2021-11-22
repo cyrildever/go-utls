@@ -6,6 +6,10 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+const (
+	HASH = "hash"
+)
+
 var hashRegex = regexp.MustCompile(`^[0-9a-fA-F]{32}([0-9a-fA-F]{32}[0-9a-fA-F]*)?$`)
 
 //--- TYPES

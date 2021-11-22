@@ -4,6 +4,10 @@ import (
 	"encoding/base64"
 )
 
+const (
+	BASE_64 = "base64"
+)
+
 //--- TYPES
 
 // Base64 is the base64 string representation of a byte array.

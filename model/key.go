@@ -4,6 +4,10 @@ import (
 	"github.com/cyrildever/go-utls/common/utils"
 )
 
+const (
+	KEY = "key"
+)
+
 //--- TYPES
 
 // Key is the hexadecimal string representation of a public or private key.
