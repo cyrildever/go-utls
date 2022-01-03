@@ -7,7 +7,7 @@ require (
 	github.com/beevik/ntp v0.3.0
 	github.com/btcsuite/btcd v0.22.0-beta // indirect
 	github.com/elliotchance/orderedmap v1.4.0
-	github.com/ethereum/go-ethereum v1.10.13
+	github.com/ethereum/go-ethereum v1.10.14
 	github.com/fatih/color v1.13.0
 	github.com/go-stack/stack v1.8.1
 	github.com/gofrs/uuid v4.2.0+incompatible
