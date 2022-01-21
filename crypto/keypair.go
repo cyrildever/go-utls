@@ -9,9 +9,9 @@ import (
 	"math/big"
 
 	"github.com/cyrildever/go-utls/common/utils"
+	"github.com/cyrildever/go-utls/crypto/bip32"
 	"github.com/ethereum/go-ethereum/crypto/ecies"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
-	"github.com/sammyne/bip32"
 )
 
 const (

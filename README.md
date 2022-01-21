@@ -19,7 +19,7 @@ go get github.com/cyrildever/go-utls
 ```
 
 This repository contains the following modules:
-- `crypto`: a proxy to Go-Ethereum's ECIES library and to my [`ecies-geth`](https://www.npmjs.com/package/ecies-geth) JavaScript library (including the `Path` type) as well as a small `SSHPublicKey2String()` utility;
+- `crypto`: a proxy to Go-Ethereum's ECIES library and to my [`ecies-geth`](https://www.npmjs.com/package/ecies-geth) JavaScript library (including the `Path` type) as well as a small `SSHPublicKey2String()` utility and a working copy of a [`bip32` module](https://github.com/sammyne/bip32) I needed;
 - `io`: a light REST client utility on top of `fasthttp` with `Delete`, `Get`, `Patch`, `Post` and `Put` methods;
 - `model`: a list of types I frequently use in my projects (such as `Base64` or `Hash` types) all implementing my [`Model`](model/Model.go) interface;
 - `normalizer`: the adaptation of my Empreinte Sociométrique&trade; patented work for normalizing contact data (see its specific [README](normalizer/README.md) or use its TypeScript equivalent on NPM: [`es-normalizer`](https://www.npmjs.com/package/es-normalizer));
@@ -38,7 +38,7 @@ This repository contains the following modules:
 
 ### License
 
-These modules are distributed under a MIT license.
+These modules are distributed under a MIT license (except for the `bip32` submodule which is an [ISC license](crypto/bip32/LICENSE)). \
 See the [LICENSE](LICENSE) file.
 
 
