@@ -5,17 +5,18 @@ go 1.14
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/beevik/ntp v0.3.0
-	github.com/btcsuite/btcd v0.22.0-beta // indirect
+	github.com/btcsuite/btcd v0.20.1-beta
+	github.com/btcsuite/btcutil v1.0.2
 	github.com/elliotchance/orderedmap v1.4.0
 	github.com/ethereum/go-ethereum v1.10.15
 	github.com/fatih/color v1.13.0
 	github.com/go-stack/stack v1.8.1
 	github.com/gofrs/uuid v4.2.0+incompatible
-	github.com/google/go-cmp v0.5.6 // indirect
+	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/klauspost/compress v1.14.1 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/metakeule/fmtdate v1.1.2
-	github.com/sammyne/bip32 v1.0.1
+	github.com/sammyne/base58 v0.1.0
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/valyala/fasthttp v1.32.0
 	github.com/vmihailenco/msgpack/v5 v5.3.5
@@ -27,5 +28,3 @@ require (
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	gotest.tools v2.2.0+incompatible
 )
-
-replace github.com/btcsuite/btcd v0.18.1 => github.com/btcsuite/btcd v0.0.0-20181013004428-67e573d211ac
