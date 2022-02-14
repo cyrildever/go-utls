@@ -8,10 +8,9 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/btcsuite/btcutil"
-
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcutil"
 	"github.com/sammyne/base58"
 )
 

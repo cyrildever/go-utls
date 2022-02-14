@@ -4,8 +4,8 @@ go 1.14
 
 require (
 	github.com/beevik/ntp v0.3.0
-	github.com/btcsuite/btcd v0.20.1-beta
-	github.com/btcsuite/btcutil v1.0.2
+	github.com/btcsuite/btcd v0.22.0-beta
+	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce
 	github.com/elliotchance/orderedmap v1.4.0
 	github.com/ethereum/go-ethereum v1.10.15
 	github.com/fatih/color v1.13.0

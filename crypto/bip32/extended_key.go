@@ -1,6 +1,8 @@
 package bip32
 
-import "github.com/btcsuite/btcd/btcec"
+import (
+	"github.com/btcsuite/btcd/btcec"
+)
 
 // References:
 //   [BIP32]: BIP0032 - Hierarchical Deterministic Wallets
