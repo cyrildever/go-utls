@@ -7,7 +7,7 @@ require (
 	github.com/btcsuite/btcd v0.22.0-beta
 	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce
 	github.com/elliotchance/orderedmap v1.4.0
-	github.com/ethereum/go-ethereum v1.10.15
+	github.com/ethereum/go-ethereum v1.10.16
 	github.com/fatih/color v1.13.0
 	github.com/go-stack/stack v1.8.1
 	github.com/gofrs/uuid v4.2.0+incompatible

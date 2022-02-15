@@ -13,15 +13,20 @@ func TestEnv(t *testing.T) {
 	TEST_ENV := "TEST_ENV"
 	os.Setenv(TEST_ENV, "1")
 
-	isSet, boolean := env.GetBool(TEST_ENV)
-	assert.Assert(t, isSet)
+	boolean, wasSet := env.GetBool(TEST_ENV)
+	assert.Assert(t, wasSet)
 	assert.Equal(t, boolean, true)
 
-	isSet, integer := env.GetInt(TEST_ENV)
-	assert.Assert(t, isSet)
+	integer, wasSet := env.GetInt(TEST_ENV)
+	assert.Assert(t, wasSet)
 	assert.Equal(t, integer, 1)
 
-	isSet, str := env.GetStr(TEST_ENV)
-	assert.Assert(t, isSet)
+	str, wasSet := env.GetStr(TEST_ENV)
+	assert.Assert(t, wasSet)
 	assert.Equal(t, str, "1")
+
+	def, wasSet := env.GetStr("DEFAULT_ENV", "my-default-value")
+	assert.Assert(t, !wasSet)
+	assert.Equal(t, def, "my-default-value")
+	assert.Equal(t, os.Getenv("DEFAULT_ENV"), def)
 }

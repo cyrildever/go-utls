@@ -27,7 +27,7 @@ This repository contains the following modules:
   * `caller`: to get information about the location of the calling function (file name and line number);
   * `concurrent`: to handle concurrent maps and slices (with faster slice appending when its length is set at instantiation through the `concurrent.NewSlice` function);
   * `email`: my "quick-and-dirty" SMTP client (including examples in tests for use with AWS SES or Gmail);
-  * `env`: to know if an environment variable is set and cast it as either a boolean, an integer or a string;
+  * `env`: to know if an environment variable is set and cast it as either a boolean, an integer or a string (potentially setting it with a default value);
   * `event`: a simple event bus manager;
   * `file`: to find, truncate, know existence, delete or get lines from files;
   * `logger`: a wrapper to the `log` package to output logs to stderr and optionally a file;
