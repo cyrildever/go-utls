@@ -9,7 +9,7 @@ _Utilities for Go_
 go-utls is a small Go repository where I put all the useful stuff I regularly need in my projects.
 Feel free to use at your discretion with the appropriate license mentions.
 
-_NB: I've developed the same kind of library for TypeScript, available on NPM: [`ts-utls`](https://www.npmjs.com/package/ts-utls)_
+_NB: I've developed the same kind of libraries for [TypeScript](https://www.npmjs.com/package/ts-utls) and [Python](https://pypi.org/project/py-utls/)._
 
 
 ### Usage
