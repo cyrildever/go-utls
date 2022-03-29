@@ -18,3 +18,10 @@ func TestCapitalize(t *testing.T) {
 	assert.Assert(t, capitalized != titled)
 	assert.Equal(t, titled, "My Capitalized Sentence")
 }
+
+// TestReverse ...
+func TestReverse(t *testing.T) {
+	ref := "desrever"
+	reversed := utils.Reverse("reversed")
+	assert.Equal(t, reversed, ref)
+}

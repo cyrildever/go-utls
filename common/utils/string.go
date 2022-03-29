@@ -15,3 +15,17 @@ func Capitalize(sentence string) string {
 	}
 	return str
 }
+
+// Reverse write the passed string backwards
+func Reverse(str string) string {
+	n := len(str)
+	if n < 2 {
+		return str
+	}
+	runes := make([]rune, n)
+	for _, r := range str {
+		n--
+		runes[n] = r
+	}
+	return string(runes[n:])
+}

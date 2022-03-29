@@ -19,9 +19,9 @@ require (
 	github.com/valyala/fasthttp v1.34.0
 	github.com/vmihailenco/msgpack/v5 v5.3.5
 	go.mongodb.org/mongo-driver v1.8.4
-	golang.org/x/crypto v0.0.0-20220307211146-efcb8507fb70
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f
-	golang.org/x/sys v0.0.0-20220307203707-22a9840ba4d7 // indirect
+	golang.org/x/crypto v0.0.0-20220321153916-2c7772ba3064
+	golang.org/x/net v0.0.0-20220325170049-de3da57026de
+	golang.org/x/sys v0.0.0-20220328115105-d36c6a25d886 // indirect
 	golang.org/x/text v0.3.7
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 	gotest.tools v2.2.0+incompatible
