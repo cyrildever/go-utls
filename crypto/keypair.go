@@ -5,19 +5,41 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
+	"encoding/binary"
 	"fmt"
 	"math/big"
 
+	"github.com/btcsuite/btcd/btcec"
 	"github.com/cyrildever/go-utls/common/utils"
-	"github.com/cyrildever/go-utls/crypto/bip32"
 	"github.com/ethereum/go-ethereum/crypto/ecies"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
+	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
+	"github.com/sammyne/base58"
 )
 
 const (
 	//--- ERROR MESSAGES
 	invalidKeysErrorTxt = "invalid EC keys"
 )
+
+var secp256k1Curve = btcec.S256()
+
+// BIP32PublicKey is the structure layout for an extended public key.
+type BIP32PublicKey struct {
+	ChainCode  []byte
+	ChildIndex uint32 // this is the Index-th child of its parent
+	Data       []byte // the serialized data in the compressed form
+	Level      uint8  // name so to avoid conflict with method Depth()
+	ParentFP   []byte
+	Version    []byte
+}
+
+// BIP32PrivateKey houses all the information of an extended private key.
+type BIP32PrivateKey struct {
+	BIP32PublicKey
+	Data    []byte
+	Version []byte
+}
 
 // GenerateKeyPair is the function that should be used whenever a keypair is needed in the Rooot project.
 //
@@ -27,40 +49,25 @@ const (
 // It shall be used for either signing with ECDSA or encrypting/decrypting with ECIES.
 // One should use the utils.ToHex() utility method to save any of these byte arrays as their hexadecimal string representation if needed.
 func GenerateKeyPair(seed []byte, path Path) (pubkey, privkey []byte, err error) {
-	mk, err := bip32.NewMasterKey(seed, *bip32.MainNetPrivateKey)
+	wallet, err := hdwallet.NewFromSeed(seed)
 	if err != nil {
 		return
 	}
-	indices, err := path.Parse()
+	p := hdwallet.MustParseDerivationPath(path.String())
+	acc, err := wallet.Derive(p, false)
 	if err != nil {
 		return
 	}
-	var hk bip32.ExtendedKey
-	if indices.Account.Hardened {
-		hk, err = mk.Child(bip32.HardenIndex(indices.Account.Number))
-		if err != nil {
-			return
-		}
-	} else {
-		hk, err = mk.Child(indices.Account.Number)
-		if err != nil {
-			return
-		}
-	}
-	ek, err := hk.Child(indices.Scope)
+	sk, err := wallet.PrivateKeyBytes(acc)
 	if err != nil {
 		return
 	}
-	xk, err := ek.Child(indices.KeyIndex)
+	pk, err := wallet.PublicKeyBytes(acc)
 	if err != nil {
 		return
 	}
-	pubkey, err = derivePublicKeyFrom(xk.(*bip32.PrivateKey))
-	if err != nil {
-		return
-	}
-	newPrivate, err := bip32.ParsePrivateKey(xk.String())
-	privkey = newPrivate.ToECPrivate().Serialize()
+	pubkey = pk
+	privkey = sk
 	return
 }
 
@@ -81,20 +88,29 @@ func GenerateRandomKeyPair() (pubkey, privkey []byte, err error) {
 
 // ParsePrivateKey ...
 func ParsePrivateKey(base58PrivateKey string) (pubkey []byte, err error) {
-	sk, err := bip32.ParsePrivateKey(base58PrivateKey)
-	if err != nil {
-		return
+	// decodePublicKey is applicable here too !!!
+	pub, err := decodePublicKey(base58PrivateKey)
+	if nil != err {
+		return nil, err
 	}
-	return derivePublicKeyFrom(sk)
+
+	priv := &BIP32PrivateKey{
+		BIP32PublicKey: *pub,
+		Data:           pub.Data[1:], // simply trims out the 0x00 prefix
+	}
+	priv.Version = priv.BIP32PublicKey.Version
+	priv.BIP32PublicKey.Data, priv.BIP32PublicKey.Version = nil, nil
+
+	return derivePublicKeyFrom(priv)
 }
 
 // ParsePublicKey ...
 func ParsePublicKey(base58PublicKey string) (pubkey []byte, err error) {
-	pk, err := bip32.ParsePublicKey(base58PublicKey)
+	pk, err := decodePublicKey(base58PublicKey)
 	if err != nil {
 		return
 	}
-	pub, err := pk.Public()
+	pub, err := btcec.ParsePubKey(pk.Data, secp256k1Curve)
 	if err != nil {
 		return
 	}
@@ -193,8 +209,50 @@ func IsCompatibleKeyPair(pk, sk []byte) bool {
 
 // --- utility functions
 
-func derivePublicKeyFrom(xk *bip32.PrivateKey) (pubkey []byte, err error) {
-	pk, err := xk.Public()
+func decodePublicKey(data58 string) (pub *BIP32PublicKey, err error) {
+	decoded, version, err := base58.CheckDecodeX(data58, 4)
+	if err != nil {
+		return
+	}
+	if len(decoded)+4 != 78 {
+		return nil, fmt.Errorf("invalid key length")
+	}
+
+	pk := new(BIP32PublicKey)
+	// The serialized format is:
+	//   version (4) || depth (1) || parent fingerprint (4)) ||
+	//   child num (4) || chain code (32) || key data (33)
+	// where the version has separated from decoded
+
+	// decompose the decoded payload into fields
+	pk.Version = version
+
+	a, b := 0, 1
+	pk.Level = decoded[a:b][0]
+
+	a, b = b, b+4
+	pk.ParentFP = decoded[a:b]
+
+	a, b = b, b+4
+	pk.ChildIndex = binary.BigEndian.Uint32(decoded[a:b])
+
+	a, b = b, b+32
+	pk.ChainCode = decoded[a:b]
+
+	a, b = b, b+33
+	pk.Data = decoded[a:b]
+
+	return pk, nil
+}
+
+func derivePublicKeyFrom(key *BIP32PrivateKey) (pubkey []byte, err error) {
+	if 0 == len(key.BIP32PublicKey.Data) {
+		x, y := secp256k1Curve.ScalarBaseMult(key.Data)
+		pubKey := btcec.PublicKey{Curve: secp256k1Curve, X: x, Y: y}
+
+		key.BIP32PublicKey.Data = pubKey.SerializeCompressed()
+	}
+	pk, err := btcec.ParsePubKey(key.BIP32PublicKey.Data, secp256k1Curve)
 	if err != nil {
 		return
 	}

@@ -5,7 +5,6 @@ go 1.14
 require (
 	github.com/beevik/ntp v0.3.0
 	github.com/btcsuite/btcd v0.22.0-beta
-	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce
 	github.com/elliotchance/orderedmap v1.4.0
 	github.com/ethereum/go-ethereum v1.10.16
 	github.com/fatih/color v1.13.0
@@ -14,6 +13,7 @@ require (
 	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/metakeule/fmtdate v1.1.2
+	github.com/miguelmota/go-ethereum-hdwallet v0.1.1
 	github.com/sammyne/base58 v0.1.0
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/valyala/fasthttp v1.34.0
