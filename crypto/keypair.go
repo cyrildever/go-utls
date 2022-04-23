@@ -215,16 +215,17 @@ func decodePublicKey(data58 string) (pub *BIP32PublicKey, err error) {
 		return
 	}
 	if len(decoded)+4 != 78 {
-		return nil, fmt.Errorf("invalid key length")
+		return nil, fmt.Errorf("invalid key length for %s", data58)
 	}
 
 	pk := new(BIP32PublicKey)
+
+	// Decompose the decoded payload into fields
+	//
 	// The serialized format is:
 	//   version (4) || depth (1) || parent fingerprint (4)) ||
 	//   child num (4) || chain code (32) || key data (33)
-	// where the version has separated from decoded
-
-	// decompose the decoded payload into fields
+	// where the version was already separated from decoded
 	pk.Version = version
 
 	a, b := 0, 1
@@ -242,7 +243,13 @@ func decodePublicKey(data58 string) (pub *BIP32PublicKey, err error) {
 	a, b = b, b+33
 	pk.Data = decoded[a:b]
 
-	return pk, nil
+	// On-curve checking
+	if _, err := btcec.ParsePubKey(pub.Data, secp256k1Curve); nil != err {
+		return nil, err
+	}
+
+	pub = pk
+	return
 }
 
 func derivePublicKeyFrom(key *BIP32PrivateKey) (pubkey []byte, err error) {
