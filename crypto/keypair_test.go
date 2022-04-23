@@ -41,7 +41,10 @@ func TestKeypair(t *testing.T) {
 	assert.Equal(t, privkey1, "b9fc3b425d6c1745b9c963c97e6e1d4c1db7a093a36e0cf7c0bf85dc1130b8a0")
 
 	// From base58 private key
-	pk2, _ := crypto.ParsePrivateKey("xprv9zMRtaKN7WvsSgEE7nFdUaCXhvJdCY31gSmYG93nSi5qhJt1UCbaWpiyGLFVZivz6QUCvQvXUew9y9D9PkVJCYzR9EBHYtjUJcJz7seneaB")
+	pk2, err := crypto.ParsePrivateKey("xprv9zMRtaKN7WvsSgEE7nFdUaCXhvJdCY31gSmYG93nSi5qhJt1UCbaWpiyGLFVZivz6QUCvQvXUew9y9D9PkVJCYzR9EBHYtjUJcJz7seneaB")
+	if err != nil {
+		t.Fatal(err)
+	}
 	pubkey2 := utils.ToHex(pk2)
 	assert.Equal(t, pubkey1, pubkey2)
 

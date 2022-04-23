@@ -89,7 +89,7 @@ func GenerateRandomKeyPair() (pubkey, privkey []byte, err error) {
 // ParsePrivateKey ...
 func ParsePrivateKey(base58PrivateKey string) (pubkey []byte, err error) {
 	// decodePublicKey is applicable here too !!!
-	pub, err := decodePublicKey(base58PrivateKey)
+	pub, err := decodeKey(base58PrivateKey)
 	if nil != err {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ func ParsePrivateKey(base58PrivateKey string) (pubkey []byte, err error) {
 
 // ParsePublicKey ...
 func ParsePublicKey(base58PublicKey string) (pubkey []byte, err error) {
-	pk, err := decodePublicKey(base58PublicKey)
+	pk, err := decodeKey(base58PublicKey, true)
 	if err != nil {
 		return
 	}
@@ -209,7 +209,7 @@ func IsCompatibleKeyPair(pk, sk []byte) bool {
 
 // --- utility functions
 
-func decodePublicKey(data58 string) (pub *BIP32PublicKey, err error) {
+func decodeKey(data58 string, isPublic ...bool) (pub *BIP32PublicKey, err error) {
 	decoded, version, err := base58.CheckDecodeX(data58, 4)
 	if err != nil {
 		return
@@ -243,9 +243,12 @@ func decodePublicKey(data58 string) (pub *BIP32PublicKey, err error) {
 	a, b = b, b+33
 	pk.Data = decoded[a:b]
 
-	// On-curve checking
-	if _, err := btcec.ParsePubKey(pub.Data, secp256k1Curve); nil != err {
-		return nil, err
+	// On-curve checking for actual public keys
+	if len(isPublic) == 1 && isPublic[0] {
+		if _, err := btcec.ParsePubKey(pk.Data, secp256k1Curve); err != nil {
+			fmt.Println(err)
+			return nil, err
+		}
 	}
 
 	pub = pk
