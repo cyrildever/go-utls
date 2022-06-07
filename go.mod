@@ -12,7 +12,7 @@ require (
 	github.com/go-stack/stack v1.8.1
 	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/google/go-cmp v0.5.8 // indirect
-	github.com/klauspost/compress v1.15.4 // indirect
+	github.com/klauspost/compress v1.15.6 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/metakeule/fmtdate v1.1.2
 	github.com/miguelmota/go-ethereum-hdwallet v0.1.1
@@ -22,9 +22,8 @@ require (
 	github.com/valyala/fasthttp v1.37.0
 	github.com/vmihailenco/msgpack/v5 v5.3.5
 	go.mongodb.org/mongo-driver v1.9.1
-	golang.org/x/crypto v0.0.0-20220518034528-6f7dac969898
-	golang.org/x/net v0.0.0-20220517181318-183a9ca12b87
-	golang.org/x/sys v0.0.0-20220517195934-5e4e11fc645e // indirect
+	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
+	golang.org/x/net v0.0.0-20220531201128-c960675eff93
 	golang.org/x/text v0.3.7
 	gotest.tools v2.2.0+incompatible
 )

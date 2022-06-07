@@ -29,7 +29,7 @@ This repository contains the following modules:
   * `email`: my "quick-and-dirty" SMTP client (including examples in tests for use with AWS SES or Gmail);
   * `env`: to know if an environment variable is set and cast it as either a boolean, an integer or a string (potentially setting it with a default value);
   * `event`: a simple event bus manager;
-  * `file`: to find, truncate, know existence, delete or get lines from files;
+  * `file`: to find, truncate, know existence, delete, get line count or read all lines from a file;
   * `logger`: a wrapper to the `log` package to output logs to stderr and optionally a file;
   * `ntp`: another small wrapper to handle time with NTP;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, &mldr;);

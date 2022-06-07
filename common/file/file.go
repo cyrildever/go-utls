@@ -2,20 +2,57 @@ package file
 
 import (
 	"bufio"
+	"bytes"
+	"io"
 	"os"
 )
 
+// CountLines returns the number of effective lines in a file, ie. not counting any eventual last feedline/breakline
+func CountLines(filepath string) (int, error) {
+	f, err := os.Open(filepath)
+	if err != nil {
+		return 0, err
+	}
+	defer f.Close()
+
+	buf := make([]byte, 32*1024)
+	count := 0
+	lineSep := []byte{'\n'}
+
+	for {
+		c, err := f.Read(buf)
+		count += bytes.Count(buf[:c], lineSep)
+
+		switch {
+		case err == io.EOF:
+			// Eventually add 1 to the count if the last byte is the line separator
+			if offset, e := f.Seek(0, 2); e == nil {
+				lastChar := make([]byte, 1)
+				if _, e := f.ReadAt(lastChar, offset-1); e == nil {
+					if !bytes.Equal(lastChar, lineSep) {
+						count++
+					}
+				}
+			}
+			return count, nil
+
+		case err != nil:
+			return count, err
+		}
+	}
+}
+
 // Delete ...
-func Delete(filename string) error {
-	if !Exists(filename) {
+func Delete(filepath string) error {
+	if !Exists(filepath) {
 		return nil
 	}
-	return os.Remove(filename)
+	return os.Remove(filepath)
 }
 
 // Exists ...
-func Exists(filename string) bool {
-	info, err := os.Stat(filename)
+func Exists(filepath string) bool {
+	info, err := os.Stat(filepath)
 	if os.IsNotExist(err) {
 		return false
 	}
@@ -39,8 +76,8 @@ func Find(filepath string) (string, bool) {
 }
 
 // GetLines ...
-func GetLines(filename string) (lines []string, err error) {
-	f, err := os.Open(filename)
+func GetLines(filepath string) (lines []string, err error) {
+	f, err := os.Open(filepath)
 	if err != nil {
 		return
 	}
@@ -56,8 +93,8 @@ func GetLines(filename string) (lines []string, err error) {
 }
 
 // Truncate erases the content of a file without remove the file itself
-func Truncate(filename string, perm os.FileMode) error {
-	f, err := os.OpenFile(filename, os.O_TRUNC, perm)
+func Truncate(filepath string, perm os.FileMode) error {
+	f, err := os.OpenFile(filepath, os.O_TRUNC, perm)
 	if err != nil {
 		return err
 	}

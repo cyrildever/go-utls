@@ -39,3 +39,24 @@ func TestFile(t *testing.T) {
 	err = file.Delete(testfile)
 	assert.Assert(t, err == nil)
 }
+
+// TestCountLines ...
+func TestCountLines(t *testing.T) {
+	nb, err := file.CountLines("test/no_last_feedline.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, nb, 2)
+
+	nb, err = file.CountLines("test/with_extra_line.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, nb, 2)
+
+	nb, err = file.CountLines("test/empty.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+	assert.Equal(t, nb, 0)
+}
