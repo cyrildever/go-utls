@@ -5,9 +5,8 @@ go 1.14
 require (
 	github.com/beevik/ntp v0.3.0
 	github.com/btcsuite/btcd v0.22.1
-	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
 	github.com/elliotchance/orderedmap v1.4.0
-	github.com/ethereum/go-ethereum v1.10.17
+	github.com/ethereum/go-ethereum v1.10.18
 	github.com/fatih/color v1.13.0
 	github.com/go-stack/stack v1.8.1
 	github.com/gofrs/uuid v4.2.0+incompatible
@@ -23,7 +22,7 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.3.5
 	go.mongodb.org/mongo-driver v1.9.1
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
-	golang.org/x/net v0.0.0-20220531201128-c960675eff93
+	golang.org/x/net v0.0.0-20220607020251-c690dde0001d
 	golang.org/x/text v0.3.7
 	gotest.tools v2.2.0+incompatible
 )
