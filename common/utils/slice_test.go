@@ -20,3 +20,14 @@ func TestChunk(t *testing.T) {
 	assert.Equal(t, len(chunks), 1)
 	assert.DeepEqual(t, chunks[0], slice)
 }
+
+// TestContainString ...
+func TestContainString(t *testing.T) {
+	slice := []string{"1", "2", "3", "4", "5", "6", "7", "8"}
+	found := utils.ContainString(slice, "1")
+	assert.Assert(t, found)
+
+	slice = make([]string, 4)
+	found = utils.ContainString(slice, "1")
+	assert.Assert(t, found == false)
+}

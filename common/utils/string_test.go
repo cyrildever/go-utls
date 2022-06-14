@@ -1,10 +1,11 @@
 package utils_test
 
 import (
-	"strings"
 	"testing"
 
 	"github.com/cyrildever/go-utls/common/utils"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"gotest.tools/assert"
 )
 
@@ -14,7 +15,8 @@ func TestCapitalize(t *testing.T) {
 	capitalized := utils.Capitalize("my capitalized sentence")
 	assert.Equal(t, capitalized, ref)
 
-	titled := strings.Title("my capitalized sentence")
+	caser := cases.Title(language.English)
+	titled := caser.String("my capitalized sentence")
 	assert.Assert(t, capitalized != titled)
 	assert.Equal(t, titled, "My Capitalized Sentence")
 }
