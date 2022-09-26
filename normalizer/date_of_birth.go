@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/metakeule/fmtdate"
+	"gitlab.com/metakeule/fmtdate"
 )
 
 const (
