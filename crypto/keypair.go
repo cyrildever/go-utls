@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/btcsuite/btcd/btcec"
+	"github.com/btcsuite/btcd/btcec/v2"
 	"github.com/cyrildever/go-utls/common/utils"
+	"github.com/cyrildever/go-utls/crypto/hdwallet"
 	"github.com/ethereum/go-ethereum/crypto/ecies"
 	"github.com/ethereum/go-ethereum/crypto/secp256k1"
-	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
 	"github.com/sammyne/base58"
 )
 
@@ -110,11 +110,11 @@ func ParsePublicKey(base58PublicKey string) (pubkey []byte, err error) {
 	if err != nil {
 		return
 	}
-	pub, err := btcec.ParsePubKey(pk.Data, secp256k1Curve)
+	pub, err := btcec.ParsePubKey(pk.Data)
 	if err != nil {
 		return
 	}
-	pubkey = elliptic.Marshal(secp256k1.S256(), pub.X, pub.Y)
+	pubkey = elliptic.Marshal(secp256k1.S256(), pub.X(), pub.Y())
 	return
 }
 
@@ -245,7 +245,7 @@ func decodeKey(data58 string, isPublic ...bool) (pub *BIP32PublicKey, err error)
 
 	// On-curve checking for actual public keys
 	if len(isPublic) == 1 && isPublic[0] {
-		if _, err := btcec.ParsePubKey(pk.Data, secp256k1Curve); err != nil {
+		if _, err := btcec.ParsePubKey(pk.Data); err != nil {
 			fmt.Println(err)
 			return nil, err
 		}
@@ -258,14 +258,22 @@ func decodeKey(data58 string, isPublic ...bool) (pub *BIP32PublicKey, err error)
 func derivePublicKeyFrom(key *BIP32PrivateKey) (pubkey []byte, err error) {
 	if 0 == len(key.BIP32PublicKey.Data) {
 		x, y := secp256k1Curve.ScalarBaseMult(key.Data)
-		pubKey := btcec.PublicKey{Curve: secp256k1Curve, X: x, Y: y}
+		xVal := &btcec.FieldVal{}
+		x32 := &[32]byte{}
+		copy(x32[:], x.Bytes())
+		xVal.SetBytes(x32)
+		yVal := &btcec.FieldVal{}
+		y32 := &[32]byte{}
+		copy(y32[:], y.Bytes())
+		yVal.SetBytes(y32)
+		pubKey := btcec.NewPublicKey(xVal, yVal)
 
 		key.BIP32PublicKey.Data = pubKey.SerializeCompressed()
 	}
-	pk, err := btcec.ParsePubKey(key.BIP32PublicKey.Data, secp256k1Curve)
+	pk, err := btcec.ParsePubKey(key.BIP32PublicKey.Data)
 	if err != nil {
 		return
 	}
-	pubkey = elliptic.Marshal(secp256k1.S256(), pk.X, pk.Y)
+	pubkey = elliptic.Marshal(secp256k1.S256(), pk.X(), pk.Y())
 	return
 }
