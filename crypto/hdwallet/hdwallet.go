@@ -20,6 +20,15 @@ import (
 	"github.com/tyler-smith/go-bip39"
 )
 
+/*
+ * @see https://github.com/miguelmota/go-ethereum-hdwallet
+ *
+ * It is a copy from the above module made because it was archived by its owner and
+ * couldn't take into account the changes in the btcd module, hence occasioning errors
+ * on dependency updates.
+ * I only added the nolint instruction on line 520.
+ */
+
 // DefaultRootDerivationPath is the root path to which custom derivation endpoints
 // are appended. As such, the first account will be at m/44'/60'/0'/0, the second
 // at m/44'/60'/0'/1, etc.
