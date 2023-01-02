@@ -31,19 +31,19 @@ func DateLayoutJava2Go(layout string) string {
 		goLayout = strings.Replace(goLayout, "MMMM", "January", 1)
 	} else if strings.Contains(goLayout, "MMM") {
 		goLayout = strings.Replace(goLayout, "MMM", "Jan", 1)
-	} else if strings.Contains(goLayout, "MM") {
+	} else if strings.Contains(goLayout, "MM") { // nolint:all
 		goLayout = strings.Replace(goLayout, "MM", "01", 1)
 	}
 	// Day of month
 	if strings.Contains(goLayout, "dd") {
 		goLayout = strings.Replace(goLayout, "dd", "02", 1)
-	} else if strings.Contains(goLayout, "d") {
+	} else if strings.Contains(goLayout, "d") { // nolint:all
 		goLayout = strings.Replace(goLayout, "d", "2", 1)
 	}
 	// Day of week
 	if strings.Contains(goLayout, "EEEE") {
 		goLayout = strings.Replace(goLayout, "EEEE", "Monday", 1)
-	} else if strings.Contains(goLayout, "EEE") {
+	} else if strings.Contains(goLayout, "EEE") { // nolint:all
 		goLayout = strings.Replace(goLayout, "EEE", "Mon", 1)
 	}
 	// Hour
@@ -51,18 +51,18 @@ func DateLayoutJava2Go(layout string) string {
 		goLayout = strings.Replace(goLayout, "HH", "15", 1)
 	} else if strings.Contains(goLayout, "KK") {
 		goLayout = strings.Replace(goLayout, "KK", "03", 1)
-	} else if strings.Contains(goLayout, "K") {
+	} else if strings.Contains(goLayout, "K") { // nolint:all
 		goLayout = strings.Replace(goLayout, "K", "3", 1)
 	}
-	if strings.Contains(goLayout, " a") {
+	if strings.Contains(goLayout, " a") { // nolint:all
 		goLayout = strings.Replace(goLayout, " a", " PM", 1)
 	}
 	// Minute
-	if strings.Contains(goLayout, "mm") {
+	if strings.Contains(goLayout, "mm") { // nolint:all
 		goLayout = strings.Replace(goLayout, "mm", "04", 1)
 	}
 	// Second
-	if strings.Contains(goLayout, "ss") {
+	if strings.Contains(goLayout, "ss") { // nolint:all
 		goLayout = strings.Replace(goLayout, "ss", "05", 1)
 	}
 	// Millisecond
@@ -70,12 +70,12 @@ func DateLayoutJava2Go(layout string) string {
 		goLayout = strings.ReplaceAll(goLayout, "S", "0")
 	}
 	// Time zone
-	if strings.Contains(goLayout, "'T'") {
+	if strings.Contains(goLayout, "'T'") { // nolint:all
 		goLayout = strings.Replace(goLayout, "'T'", "T", 1)
 	}
 	if strings.Contains(goLayout, "Z") {
 		goLayout = strings.Replace(goLayout, "Z", "-0700", 1)
-	} else if strings.Contains(goLayout, " z") {
+	} else if strings.Contains(goLayout, " z") { // nolint:all
 		goLayout = strings.Replace(goLayout, " z", " MST", 1)
 	}
 	return goLayout
