@@ -33,7 +33,7 @@ This repository contains the following modules:
   * `logger`: a wrapper to the `log` package to output logs to stderr and optionally a file;
   * `ntp`: another small wrapper to handle time with NTP;
   * `packer`: to marshal/unmarshal data (JSON, MessagePack, MongoDB's Bson, &mldr;);
-  * `utils`: a bunch of useful utility functions (`Capitalize()`, `Chunk()`, `DateFormat()` from Java notation, `EuclideanDivision()`, `Flatten()`, `FromHex()`/`ToHex()`, back-and-forth conversions of byte arrays (to string, number, etc.), `IsPointer()`/`IsValue()` test methods, `Reverse()` for strings, `ToUTF8()` string formatting, &mldr;);
+  * `utils`: a bunch of useful utility functions (`Capitalize()`, `Chunk()`, `DateFormat()` from Java notation, `EuclideanDivision()`, `Flatten()`, `FromHex()`/`ToHex()`, back-and-forth conversions of byte arrays (to string, number, etc.), `IsPointer()`/`IsValue()` test methods, `PrettyPrintJSON()`, `Reverse()` for strings, `ToUTF8()` string formatting, &mldr;);
   * `xor`: to apply XOR operation to strings or byte arrays.
 
 
