@@ -6,7 +6,7 @@ _Utilities for Go_
 ![GitHub issues](https://img.shields.io/github/issues/cyrildever/go-utls)
 ![GitHub](https://img.shields.io/github/license/cyrildever/go-utls)
 
-go-utls is a small Go repository where I put all the useful stuff I regularly need in my projects.
+`go-utls` is a small Go repository where I put all the useful stuff I regularly need in my projects.
 Feel free to use at your discretion with the appropriate license mentions.
 
 _NB: I've developed the same kind of libraries for [TypeScript](https://www.npmjs.com/package/ts-utls) and [Python](https://pypi.org/project/py-utls/)._
@@ -39,7 +39,7 @@ This repository contains the following modules:
 
 ### License
 
-These modules are distributed under a MIT license (except for the `bip32` submodule which is an [ISC license](crypto/bip32/LICENSE)). \
+These modules are distributed under a MIT license. \
 See the [LICENSE](LICENSE) file.
 
 
