@@ -22,7 +22,7 @@ func main() {
 	fmt.Println("================")
 	fmt.Println("This library holds some modules I found useful in my Go developments. It's available under a MIT license.")
 	fmt.Println("")
-	fmt.Println("© 2020-2023 Cyril Dever. All rights reserved.")
+	fmt.Println("© 2020-2024 Cyril Dever. All rights reserved.")
 	fmt.Println("")
 
 	log.Info("Enjoy~")
