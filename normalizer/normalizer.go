@@ -2,7 +2,7 @@ package normalizer
 
 import (
 	"errors"
-	"io/ioutil"
+	"io"
 	"regexp"
 	"strings"
 	"unicode"
@@ -40,7 +40,7 @@ var re2 = regexp.MustCompile(`[-]+`)
 // Uniformize applies the basic normalizing process: trim, capitalize, ...
 func Uniformize(input string) string {
 	transformer := transform.Chain(norm.NFD, runes.Remove(runes.In(unicode.Mn)), norm.NFC)
-	normalized, err := ioutil.ReadAll(transform.NewReader(strings.NewReader(strings.ToLower(strings.TrimSpace(input))), transformer))
+	normalized, err := io.ReadAll(transform.NewReader(strings.NewReader(strings.ToLower(strings.TrimSpace(input))), transformer))
 	if err != nil {
 		return ""
 	}

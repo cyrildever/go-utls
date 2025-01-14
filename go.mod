@@ -7,7 +7,7 @@ require (
 	github.com/btcsuite/btcd v0.24.2
 	github.com/btcsuite/btcd/btcec/v2 v2.3.4
 	github.com/btcsuite/btcd/btcutil v1.1.6
-	github.com/elliotchance/orderedmap v1.7.0
+	github.com/elliotchance/orderedmap v1.8.0
 	github.com/ethereum/go-ethereum v1.14.12
 	github.com/fatih/color v1.18.0
 	github.com/go-stack/stack v1.8.1
@@ -17,9 +17,9 @@ require (
 	github.com/valyala/fasthttp v1.58.0
 	github.com/vmihailenco/msgpack/v5 v5.4.1
 	gitlab.com/metakeule/fmtdate v1.2.2
-	go.mongodb.org/mongo-driver v1.17.1
-	golang.org/x/crypto v0.31.0
-	golang.org/x/net v0.33.0
+	go.mongodb.org/mongo-driver v1.17.2
+	golang.org/x/crypto v0.32.0
+	golang.org/x/net v0.34.0
 	golang.org/x/text v0.21.0
 	gotest.tools v2.2.0+incompatible
 )
@@ -38,7 +38,7 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/holiman/uint256 v1.3.2 // indirect
 	github.com/klauspost/compress v1.17.11 // indirect
-	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mmcloughlin/addchain v0.4.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -47,6 +47,6 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
 	rsc.io/tmplfunc v0.0.3 // indirect
 )

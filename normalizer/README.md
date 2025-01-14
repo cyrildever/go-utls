@@ -5,7 +5,7 @@ This is a Go normalization library for contact data (address, phones, etc.) adap
 ### Motivation
 
 When it comes to hashing data, the necessary uniqueness of the source sometimes makes it hard to compare two hashed data, mostly if dealing with postal address. This library helps normalizing any contact data (the postal or e-mail address, the mobile or landline phone number, the title, names or date of birth of an individual) that would feed any hashing algorithm to make hash comparison always trustable.
-It's based on the work for the Empreinte Sociométrique&trade; patented by Cyril Dever for Edgewhere. For more information on the latter, please [contact me](mailto:cdever@edgewhere.fr).
+It's based on the work for the Empreinte Sociométrique&trade; patented by Cyril Dever for Edgewhere. For more information on the latter, please [contact me](mailto:cdever@peps-s.com).
 
 
 ### Usage
@@ -98,4 +98,4 @@ See the [LICENSE](LICENSE) file.
 
 
 <hr />
-&copy; 2018-2020 Cyril Dever. All rights reserved.
+&copy; 2018-2025 Cyril Dever. All rights reserved.

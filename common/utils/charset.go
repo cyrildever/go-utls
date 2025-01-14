@@ -2,7 +2,7 @@ package utils
 
 import (
 	"errors"
-	"io/ioutil"
+	"io"
 	"strings"
 
 	"golang.org/x/net/html/charset"
@@ -40,7 +40,7 @@ func ToUTF8(encoded, format string) (decoded string, err error) {
 	if err != nil {
 		return
 	}
-	foundLine, err := ioutil.ReadAll(foundReader)
+	foundLine, err := io.ReadAll(foundReader)
 	if err != nil {
 		return
 	}

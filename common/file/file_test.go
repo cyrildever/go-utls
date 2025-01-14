@@ -1,7 +1,7 @@
 package file_test
 
 import (
-	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/cyrildever/go-utls/common/file"
@@ -12,7 +12,7 @@ import (
 func TestFile(t *testing.T) {
 	testfile := "testFile.txt"
 	content := "Ceci est un test"
-	err := ioutil.WriteFile(testfile, []byte(content), 0644)
+	err := os.WriteFile(testfile, []byte(content), 0644)
 	if err != nil {
 		t.Fatal(err)
 	}

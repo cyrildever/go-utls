@@ -1,7 +1,7 @@
 package crypto_test
 
 import (
-	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/cyrildever/go-utls/crypto"
@@ -12,9 +12,10 @@ import (
 // TestSSH ...
 //
 // NB: Instruction used to create PEM key:
+//
 //	ssh-keygen -t rsa -b 2048 -C test
 func TestSSH(t *testing.T) {
-	pemBytes, err := ioutil.ReadFile("test/ssh_rsa.key")
+	pemBytes, err := os.ReadFile("test/ssh_rsa.key")
 	if err != nil {
 		t.Fatal(err)
 	}
