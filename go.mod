@@ -8,7 +8,7 @@ require (
 	github.com/btcsuite/btcd/btcec/v2 v2.3.6
 	github.com/btcsuite/btcd/btcutil v1.1.6
 	github.com/elliotchance/orderedmap v1.8.0
-	github.com/ethereum/go-ethereum v1.16.7
+	github.com/ethereum/go-ethereum v1.16.8
 	github.com/fatih/color v1.18.0
 	github.com/go-stack/stack v1.8.1
 	github.com/gofrs/uuid v4.4.0+incompatible
@@ -18,14 +18,14 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.4.1
 	gitlab.com/metakeule/fmtdate v1.2.2
 	go.mongodb.org/mongo-driver v1.17.6
-	golang.org/x/crypto v0.46.0
-	golang.org/x/net v0.48.0
-	golang.org/x/text v0.32.0
+	golang.org/x/crypto v0.47.0
+	golang.org/x/net v0.49.0
+	golang.org/x/text v0.33.0
 	gotest.tools v2.2.0+incompatible
 )
 
 require (
-	github.com/ProjectZKM/Ziren/crates/go-runtime/zkvm_runtime v0.0.0-20260104020744-7268a54d0358 // indirect
+	github.com/ProjectZKM/Ziren/crates/go-runtime/zkvm_runtime v0.0.0-20260112020553-64c30dda3cfd // indirect
 	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/bits-and-blooms/bitset v1.24.4 // indirect
 	github.com/btcsuite/btcd/chaincfg/chainhash v1.1.0 // indirect
@@ -45,5 +45,5 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/sync v0.19.0 // indirect
-	golang.org/x/sys v0.39.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
 )
